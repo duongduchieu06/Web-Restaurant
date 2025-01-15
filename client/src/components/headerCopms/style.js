@@ -32,3 +32,45 @@ export const HeaderContent = styled.div`
     padding: 0 150px;
 `
 
+export const ButtonLanguage = styled.div`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+`
+
+export const BoxButton = styled.div`
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 26%;
+    height: 35px;
+    border-radius: 20px;
+    padding: 5px;
+`
+
+export const Button = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F6AC00;
+    width: 150px;
+    height: 100%;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    gap: 10px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+    &:hover {
+        background-color: #fff;
+        color: #F6AC00;
+    }
+`
+

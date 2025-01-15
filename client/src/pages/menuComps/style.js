@@ -5,9 +5,15 @@ export const Wrapped = styled.div`
     padding-top: 130px;
     overflow-x: hidden;
     background-color: #A11D25;
-
-
 `
+
+// export const Line = styled.div`
+//     content: '';
+//     display: block;
+//     width: 100%;
+//     height: 10px;
+//     background-color: #fff;
+// `
 
 export const WrappedMenu = styled.div`
     max-width: 1270px;
@@ -19,14 +25,11 @@ export const WrappedMenu = styled.div`
 
 export const WrappedContent = styled.div`
     display: flex;
+    flex-wrap: wrap;
     gap: 50px;
-
+    margin-top: 40px;
 `
 
-export const BoxContent = styled.div`
-    display: flex;
-    width: 50%;
-`
 
 export const Description = styled.div`
     display: flex;
