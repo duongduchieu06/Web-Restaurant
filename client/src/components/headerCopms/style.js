@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
 
 export const HeaderWrapped = styled.div`
     display: flex;
@@ -53,7 +54,7 @@ export const BoxButton = styled.div`
     padding: 5px;
 `
 
-export const Button = styled.div`
+export const Button = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,6 +67,7 @@ export const Button = styled.div`
     font-size: 15px;
     font-weight: bold;
     gap: 10px;
+    text-decoration: none;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
     &:hover {

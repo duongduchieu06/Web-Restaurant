@@ -8,7 +8,7 @@ import slider4 from "../../assest/image/sliderSI4.jpg"
 import slider5 from "../../assest/image/sliderSI5.jpg"
 import InputForm from "../../components/inputformComps/inputform";
 
-const SignInPage = () => {
+const SignUpPage = () => {
   const sliderImages = [slider1, slider2, slider3, slider4, slider5];
 
   return (
@@ -19,14 +19,16 @@ const SignInPage = () => {
                 <SliderComponent sliderImages={sliderImages}/>
               </div>
               <Content>
-                <h1>Đăng Nhập</h1>
+                <h1>Đăng Ký</h1>
+                <InputForm style={{ width: "80%", height: "40px"}} placeholder='Vui lòng nhập Tên' />
                 <InputForm style={{ width: "80%", height: "40px"}} placeholder='Vui lòng nhập Email' />
                 <InputForm style={{ width: "80%", height: "40px"}} placeholder='Vui lòng nhập mật khẩu' />
+                <InputForm style={{ width: "80%", height: "40px"}} placeholder='Vui lòng nhập lại mật khẩu' />
                 <ButtonSignIn 
                   // disabled={!email.length || !password.length}
                   // type="primary"
                   >
-                  Đăng Nhập
+                  Đăng Ký
                 </ButtonSignIn>
               </Content>
             </Wrapped>
@@ -35,4 +37,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

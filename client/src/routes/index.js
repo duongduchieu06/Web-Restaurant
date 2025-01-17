@@ -3,6 +3,7 @@ import MenuPage from "../pages/menuComps/menupage"
 import IntroducePage from "../pages/introducepageComps/introducepage"
 import BooKTable from "../pages/booktableComps/booktable"
 import SignInPage from "../pages/signinpageComps/signinpage"
+import SignUpPage from "../pages/signuppageComps copy/signuppage"
 
 export const routes = [
     {
@@ -28,6 +29,11 @@ export const routes = [
     {
         path: '/SignIn',
         page: SignInPage,
+        isShowHeader: false
+    },
+    {
+        path: '/SignUp',
+        page: SignUpPage,
         isShowHeader: false
     },
 //trang khi khi đường dẫn sai!
