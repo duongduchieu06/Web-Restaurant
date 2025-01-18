@@ -1,5 +1,9 @@
 import React, {useState} from "react";
-import { Body, Wrapped, Content, ButtonSignIn } from "./style";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faArrowLeft,
+ } from '@fortawesome/free-solid-svg-icons';
+import { Body, ButtonBack, Wrapped, Content, ButtonSignIn, ButtonLink } from "./style";
 import SliderComponent from "../../components/sliderComps/Slider";
 import slider1 from "../../assest/image/sliderSI1.jpg"
 import slider2 from "../../assest/image/sliderSI2.jpg"
@@ -14,6 +18,7 @@ const SignInPage = () => {
   return (
     <>
         <Body>
+            <ButtonBack to={"/"}><FontAwesomeIcon icon={faArrowLeft} /></ButtonBack>
             <Wrapped>
               <div style={{width: "50%", overflow: "hidden"}}>
                 <SliderComponent sliderImages={sliderImages}/>
@@ -28,6 +33,7 @@ const SignInPage = () => {
                   >
                   Đăng Nhập
                 </ButtonSignIn>
+                <p> Chưa có tài khoản? <ButtonLink to={'/SignUp'}>Đăng Ký</ButtonLink></p>
               </Content>
             </Wrapped>
         </Body>
