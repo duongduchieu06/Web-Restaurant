@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const { genneralAcessToken, genneralRefreshToken } = require("./jwtService");
 
 const createUser = (newUser) => {
   return new Promise(async (resolve, reject) => {
@@ -53,10 +54,21 @@ const loginUser = (loginUser) => {
           message: "Mật khẩu không đúng",
         });
       }
+      const access_token = await genneralAcessToken({
+        id: checkUser.id,
+        isAdmin: checkUser.isAdmin
+      })
+
+      const refresh_token = await genneralRefreshToken({
+        id: checkUser.id,
+        isAdmin: checkUser.isAdmin
+      })
+
       resolve({
         status: "OK",
         message: "Đăng nhập thành công",
-        data: checkUser,
+        access_token,
+        refresh_token
       });
     } catch (e) {
       reject(e);
