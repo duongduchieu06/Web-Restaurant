@@ -22,10 +22,10 @@ const bookingSchema = new mongoose.Schema(
             }
         ],
         totalPrice: { type: Number, default: 0 },
-        paymentMethod: { type: String, enum: ["cash", "online"], default: cash },
-        paymentStatus: { type: String, enum: ["pending", "paid", "refunded"], default: pending },
+        paymentMethod: { type: String, enum: ["tiền mặt", "chuyển khoản"], default: "tiền mặt" },
+        paymentStatus: { type: String, enum: ["chờ xử lý", "đã thanh toán"], default: "chờ xử lý" },
         qrCodeUTL: { type: String, default: "" },
-        status: { type: String, enum: ["pending", "confirmed", "cancelled", "done"], default: pending },
+        status: { type: String, enum: ["chờ xử lý", "đã xác nhận", "đã hủy", "đã xong"], default: "chờ xử lý" },
     },
     {
         timestamps: true,

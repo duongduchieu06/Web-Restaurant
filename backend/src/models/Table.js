@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const tableSchema = new mongoose.Schema(
     {
         floor: { type: Number, required: true },
-        status: { type: String, enum: ["available", "occupied", "maintenance"], default: "available", },
+        status: { type: String, enum: ["khả dụng", "đang bận", "bảo trì"], default: "khả dụng", },
         bookings: [
             {type: mongoose.Schema.Types.ObjectId, ref: "Booking",}
         ],
