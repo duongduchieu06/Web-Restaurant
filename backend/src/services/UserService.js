@@ -104,8 +104,74 @@ const updateUser = (id, data) => {
   });
 };
 
+const deleteUser = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const checkUser = await User.findOne({
+        _id: id,
+      });
+      if (checkUser === null) {
+        resolve({
+          status: "THÔNG BÁO",
+          message: "Không có người dùng này!",
+        });
+      }
+
+      await User.findByIdAndDelete(id);
+
+      resolve({
+        status: "OK",
+        message: "Xóa thành công!",
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+const getAll = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const alluser = await User.find();
+      resolve({
+        status: "-----",
+        message: "DANH SÁCH USER",
+        data: alluser
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+const getUser = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await User.findOne({
+        _id: id,
+      });
+      if (user === null) {
+        resolve({
+          status: "THÔNG BÁO",
+          message: "Không có người dùng này!",
+        });
+      }
+      resolve({
+        status: "-----",
+        message: "NGƯỜI DÙNG:",
+        data: user
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 module.exports = {
   createUser,
   loginUser,
   updateUser,
+  deleteUser,
+  getAll,
+  getUser
 };

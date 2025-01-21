@@ -76,8 +76,58 @@ const updateUser = async (req, res) => {
     }
 }
 
+const deleteUser = async (req, res) => {
+    try{
+        const userId = req.params.id
+        if(!userId) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'Không tìm thấy id người dùng  '
+            })
+        }
+        const response = await UserService.deleteUser(userId)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+}
+
+const getAll = async (req, res) => {
+    try{
+        const response = await UserService.getAll()
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+}
+
+const getUser = async (req, res) => {
+    try{
+        const userId = req.params.id
+        if(!userId) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'Không tìm thấy id người dùng  '
+            })
+        }
+        const response = await UserService.getUser(userId)
+        return res.status(200).json(response)
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+}
+
 module.exports = {
     createUser,
     loginUser,
-    updateUser
+    updateUser,
+    deleteUser,
+    getAll,
+    getUser
 }
