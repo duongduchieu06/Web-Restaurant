@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const jwt = require('jsonwebtoken')
 const bcrypt = require("bcrypt");
 const { genneralAcessToken, genneralRefreshToken } = require("./jwtService");
 
@@ -167,11 +168,13 @@ const getUser = (id) => {
   });
 };
 
+
+
 module.exports = {
   createUser,
   loginUser,
   updateUser,
   deleteUser,
   getAll,
-  getUser
+  getUser,
 };
