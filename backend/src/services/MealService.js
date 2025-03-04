@@ -4,15 +4,22 @@ const bcrypt = require("bcrypt");
 
 const createMeal = (newMeal) => {
   return new Promise(async (resolve, reject) => {
-    const { name, image, type, price, desciption } = newMeal;
+    const { name, image, type, price, description } = newMeal;
     try {
+      if (!name || !price) {
+        resolve({
+          status: "THÔNG BÁO",
+          message: "Vui lòng cung cấp đầy đủ tên và giá món ăn"
+        });
+        return;
+      }
       const checkMeal = await Meal.findOne({
         name: name,
       });
       if (checkMeal !== null) {
         resolve({
           status: "THÔNG BÁO",
-          message: "Ủa đã có món này rùi mò, vui lòng đổi tên món ăn",
+          message: "Món ăn đã tồn tại, vui lòng đổi tên món ăn",
         });
       }
       const createMeal = await Meal.create({
@@ -20,7 +27,7 @@ const createMeal = (newMeal) => {
         image,
         type,
         price,
-        desciption,
+        description,
       });
       if (createMeal) {
         resolve({
@@ -110,10 +117,35 @@ const getMeal = (id) => {
   });
 };
 
-const getAll = ( limit, page ) => {
+const getAll = ( limit, page, sort, filter ) => {
   return new Promise(async (resolve, reject) => {
     try {
       const totalMeal = await Meal.countDocuments()
+      if(filter){
+        const label = filter[0]
+        const allmealFilter = await Meal.find({ [label]: { '$regex': filter[1]}}).limit(limit).skip( page * limit )
+        resolve({
+          status: "-----",
+          message: "DANH SÁCH MÓN ĂN",
+          data: allmealFilter,
+          total: totalMeal,
+          pageCurrent: page + 1,
+          pageTotal: Math.ceil(totalMeal / limit),
+        }); 
+      }
+      if(sort) {
+        const objectSort = {}
+        objectSort[sort[0]] = sort[1]
+        const allmealSort = await Meal.find().limit(limit).skip( page * limit ).sort(objectSort)
+        resolve({
+          status: "-----",
+          message: "DANH SÁCH MÓN ĂN",
+          data: allmealSort,
+          total: totalMeal,
+          pageCurrent: page + 1,
+          pageTotal: Math.ceil(totalMeal / limit),
+        }); 
+      }
       const allmeal = await Meal.find().limit(limit).skip( page * limit)
       resolve({
         status: "-----",
@@ -125,7 +157,6 @@ const getAll = ( limit, page ) => {
       });
     } catch (e) {
       reject(e);
-      // throw new Error(`Lỗi khi lấy danh sách món ăn: ${e.message}`);
     }
   });
 };

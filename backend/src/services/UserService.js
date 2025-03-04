@@ -84,7 +84,6 @@ const updateUser = (id, data) => {
       const checkUser = await User.findOne({
         _id: id,
       });
-      console.log("check user", checkUser);
       if (checkUser === null) {
         resolve({
           status: "THÔNG BÁO",
