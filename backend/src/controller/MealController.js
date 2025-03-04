@@ -77,7 +77,8 @@ const getMeal = async (req, res) => {
 
 const getAll = async (req, res) => {
     try{
-        const response = await MealService.getAll()
+        const { limit, page } = req.query
+        const response = await MealService.getAll( Number(limit), Number(page))
         return res.status(200).json(response)
     } catch (e) {
         return res.status(404).json({

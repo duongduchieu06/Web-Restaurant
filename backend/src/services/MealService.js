@@ -1,10 +1,10 @@
 const Meal = require("../models/Meal");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const createMeal = (newMeal) => {
   return new Promise(async (resolve, reject) => {
-    const {name, image, type, price, desciption} = newMeal;
+    const { name, image, type, price, desciption } = newMeal;
     try {
       const checkMeal = await Meal.findOne({
         name: name,
@@ -12,7 +12,7 @@ const createMeal = (newMeal) => {
       if (checkMeal !== null) {
         resolve({
           status: "THÔNG BÁO",
-          message: "Ủa đã có món này rùi mò",
+          message: "Ủa đã có món này rùi mò, vui lòng đổi tên món ăn",
         });
       }
       const createMeal = await Meal.create({
@@ -20,7 +20,7 @@ const createMeal = (newMeal) => {
         image,
         type,
         price,
-        desciption
+        desciption,
       });
       if (createMeal) {
         resolve({
@@ -101,8 +101,8 @@ const getMeal = (id) => {
       }
       resolve({
         status: "-----",
-        message: "Món ăn của mày nè:",
-        data: meal
+        message: "Món ăn của nè:",
+        data: meal,
       });
     } catch (e) {
       reject(e);
@@ -110,26 +110,30 @@ const getMeal = (id) => {
   });
 };
 
-const getAll = () => {
+const getAll = ( limit, page ) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const allmeal = await Meal.find();
+      const totalMeal = await Meal.countDocuments()
+      const allmeal = await Meal.find().limit(limit).skip( page * limit)
       resolve({
         status: "-----",
         message: "DANH SÁCH MÓN ĂN",
-        data: allmeal
+        data: allmeal,
+        total: totalMeal,
+        pageCurrent: page + 1,
+        pageTotal: Math.ceil(totalMeal / limit),
       });
     } catch (e) {
       reject(e);
+      // throw new Error(`Lỗi khi lấy danh sách món ăn: ${e.message}`);
     }
   });
 };
 
-
 module.exports = {
-    createMeal,
-    updateMeal,
-    deleteMeal,
-    getMeal,
-    getAll
+  createMeal,
+  updateMeal,
+  deleteMeal,
+  getMeal,
+  getAll,
 };
