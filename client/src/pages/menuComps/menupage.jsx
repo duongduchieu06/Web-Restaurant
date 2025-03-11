@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapped, WrappedMenu, WrappedContent } from "./style";
+import { Wrapped, Title, WrappedMenu, WrappedContent } from "./style";
 import SliderComponent from "../../components/sliderComps/Slider";
 import BoxContent from "../../components/boxcontentComps/boxcontent";
 import Line from "../../components/lineComps/line";
@@ -16,8 +16,8 @@ const MenuPage = () => {
         <Line />
         <WrappedMenu>
 
-            <span style={{fontSize: 40, fontWeight: "bold", color: "#fff", paddingTop: "50px"}}>MENU</span>
-            <span style={{fontSize: 40, fontWeight: "bold", color: "#fff", paddingTop: "40px"}}>Choose your nearest restaurant</span>
+            <Title>MENU</Title>
+            <Title>Choose your nearest restaurant</Title>
             <WrappedContent>
               <BoxContent />
               <BoxContent />

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import bgimg from "../../assest/image/background.jpg"
+import InputForm from "../../components/inputformComps/inputform";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 
@@ -41,6 +42,11 @@ export const Wrapped = styled.div`
     background-color: #f0f0f0;
 `
 
+export const WrappedSlider = styled.div`
+    width: 50%;
+    overflow: hidden;
+`
+
 export const Content = styled.div`
     width: 50%;
     display: flex;
@@ -48,6 +54,11 @@ export const Content = styled.div`
     jutify-content: center;
     align-items: center;
     gap: 20px;
+`
+
+export const InputStyle = styled(InputForm)`
+    width: 80%;
+    height: 40px;
 `
 
 export const ButtonSignIn = styled(Button)`

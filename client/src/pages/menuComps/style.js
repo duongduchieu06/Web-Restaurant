@@ -23,6 +23,13 @@ export const WrappedMenu = styled.div`
     align-items: center;
 `
 
+export const Title = styled.span`
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    padding-top: 45px;
+`
+
 export const WrappedContent = styled.div`
     display: flex;
     flex-wrap: wrap;

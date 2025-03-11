@@ -27,18 +27,14 @@ const Header = () => {
         </Link>
         <HeaderContent style={{backgroundColor: '#A31D26', height: '80px'}}>
           <BoxButton>
-              {/* <Link to={"/SignIn"}> */}
                 <Button to={"/SignIn"}>
                   <FontAwesomeIcon icon={faRightToBracket} />
                     Đăng nhập
                 </Button>
-              {/* </Link> */}
-              {/* <Link to={"/SignUp"}> */}
                 <Button to={"/SignUp"}>
                   <FontAwesomeIcon icon={faUserPlus} />
                     Đăng Ký
                 </Button>
-              {/* </Link> */}
           </BoxButton>
           <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "10px"}}>
             <ButtonLanguage style={{backgroundImage: `url(${VE})`}} />
