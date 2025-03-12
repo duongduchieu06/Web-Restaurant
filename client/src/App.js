@@ -3,17 +3,23 @@ import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes } from './routes';
 import DefaultComponent from './components/defaultComps/DefaultComponent';
+import { useQuery } from '@tanstack/react-query';
 
 function App() {
 
-  useEffect(() => {
-    fetchApi()
-  }, [])
-  
+  // const query = useQuery({ queryKey: ['todos'], queryFn: fetchApi })
+
+  // useEffect(() => {
+  //   fetchApi()
+  // }, [])
   const fetchApi = async () =>{
-    const res = await axios.get(`http://localhost:3000/api/meal/GetAll`)
-    console.log("res ", res)
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/meal/GetAll`)
+    // console.log("res ", res)
+    return res.data
   }
+
+  const query = useQuery({ queryKey: ['todos'], queryFn: fetchApi })
+  console.log('query', query)
 
   return (
     <>
