@@ -4,7 +4,7 @@ import imagelogo from "../../assest/image/logo.png"
 import VE from "../../assest/image/VE.jpg"
 import EN from "../../assest/image/EN.jpg"
 import CategoryButton from "../categoryButtonComps/categoryButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faUserPlus,
@@ -19,6 +19,13 @@ const categories = [
 ];
 
 const Header = () => {
+  const navigate = useNavigate()
+  const handelNavigateLogin = () => {
+    navigate('/SignIn')
+  }
+  const handelNavigateSignUP = () => {
+    navigate('/SignUp')
+  }
   return(
     <>
       <HeaderWrapped>
@@ -27,11 +34,11 @@ const Header = () => {
         </Link>
         <HeaderContent style={{backgroundColor: '#A31D26', height: '80px'}}>
           <BoxButton>
-                <Button to={"/SignIn"}>
+                <Button onClick={handelNavigateLogin}>
                   <FontAwesomeIcon icon={faRightToBracket} />
                     Đăng nhập
                 </Button>
-                <Button to={"/SignUp"}>
+                <Button onClick={handelNavigateSignUP}>
                   <FontAwesomeIcon icon={faUserPlus} />
                     Đăng Ký
                 </Button>

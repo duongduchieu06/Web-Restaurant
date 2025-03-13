@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import bgimg from "../../assest/image/background.jpg"
 import InputForm from "../../components/inputformComps/inputform";
+import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 
@@ -56,10 +57,23 @@ export const Content = styled.div`
     gap: 20px;
 `
 
+export const WrappedInput = styled.div`
+  width: 80%;
+  position: relative;
+`;
+
 export const InputStyle = styled(InputForm)`
-    width: 80%;
-    height: 40px;
-`
+  height: 40px;
+`;
+
+export const EyeIcon = styled(({ isShowPassword,  ...props }) =>
+  isShowPassword ? <EyeFilled {...props} /> : <EyeInvisibleFilled {...props} />
+)`
+  height: 40px;
+  position: absolute;
+  z-index: 1;
+  left: 90%;
+`;
 
 export const ButtonSignIn = styled(Button)`
     display: flex;
@@ -81,8 +95,9 @@ export const ButtonSignIn = styled(Button)`
     }
 `
 
-export const ButtonLink = styled(Link)`
+export const ButtonLink = styled.span`
     text-decoration: none;
     color: #F6AC00;
     font-weight: bold;
+    cursor: pointer;
 `

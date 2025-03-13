@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export const HeaderWrapped = styled.div`
     display: flex;
@@ -54,7 +54,7 @@ export const BoxButton = styled.div`
     padding: 5px;
 `
 
-export const Button = styled(Link)`
+export const Button = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
