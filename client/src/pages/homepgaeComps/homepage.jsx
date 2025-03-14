@@ -13,9 +13,6 @@ const HomePage = () => {
       <Wrapped>
         <SliderComponent  sliderImages={sliderImages}/>
       </Wrapped>
-      <div style={{height: '1000px'}}>
-
-      </div>
     </>
   );
 };

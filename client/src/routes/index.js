@@ -36,7 +36,6 @@ export const routes = [
         page: SignUpPage,
         isShowHeader: false
     },
-//trang khi khi đường dẫn sai!
     // {
     //     path: '*',
     //     page: NotFoundPage

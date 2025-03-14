@@ -15,7 +15,6 @@ const MenuPage = () => {
         <SliderComponent sliderImages={sliderImages}/>
         <Line />
         <WrappedMenu>
-
             <Title>MENU</Title>
             <Title>Choose your nearest restaurant</Title>
             <WrappedContent>

@@ -51,7 +51,7 @@ const Header = () => {
         <HeaderContent style={{backgroundColor: '#000', height: '50px'}}>
           {categories.map((category) => {
             return (
-              <CategoryButton name={category.name} path={category.path} key={category.path} />
+              <CategoryButton key={category.path} name={category.name} path={category.path} />
             )
           })}
         </HeaderContent>

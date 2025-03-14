@@ -15,9 +15,33 @@ import { useNavigate } from "react-router-dom";
 const SignUpPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const handleOnchangeName = (value) => {
+    setName(value)
+  }
+
+  const handleOnchangeEmail = (value) => {
+    setEmail(value)
+  }
+
+  const handleOnchangePassword = (value) => {
+    setPassword(value)
+  }
+
+  const handleOnchangeConfirmPassword = (value) => {
+    setConfirmPassword(value)
+  }
+
+  const handleSignUp = () => {
+
+  }
 
   const navigate = useNavigate()
-  const handelNavigateLogin = () => {
+  const handleNavigateLogin = () => {
     navigate('/SignIn')
   }
   const sliderImages = [slider1, slider2, slider3, slider4, slider5];
@@ -33,26 +57,27 @@ const SignUpPage = () => {
               <Content>
                 <h1>Đăng Ký</h1>
                 <WrappedInput>
-                  <InputStyle placeholder='Vui lòng nhập Tên' />
+                  <InputStyle placeholder='Vui lòng nhập Tên' value={name} onChange = {handleOnchangeName}/>
                 </WrappedInput>
                 <WrappedInput>
-                  <InputStyle placeholder='Vui lòng nhập Email' />
+                  <InputStyle placeholder='Vui lòng nhập Email' value={email} onChange = {handleOnchangeEmail}/>
                 </WrappedInput>
                 <WrappedInput>
-                  <EyeIcon isShowPassword={isShowPassword} onClick={() => setIsShowPassword(!isShowPassword)} />
-                  <InputStyle type={isShowPassword ? 'text' : 'password'} placeholder='Vui lòng nhập mật khẩu' />
+                  <EyeIcon isShowPassword={isShowPassword} onClick={() => setIsShowPassword(!isShowPassword)}/>
+                  <InputStyle type={isShowPassword ? 'text' : 'password'} placeholder='Vui lòng nhập mật khẩu' value={password} onChange={handleOnchangePassword}/>
                 </WrappedInput>
                 <WrappedInput>
-                  <EyeIcon isShowPassword={isShowConfirmPassword} onClick={() => setIsShowConfirmPassword(!isShowConfirmPassword)} />
-                  <InputStyle type={isShowConfirmPassword ? 'text' : 'password'} placeholder='Vui lòng nhập lại mật khẩu' />
+                  <EyeIcon isShowPassword={isShowConfirmPassword} onClick={() => setIsShowConfirmPassword(!isShowConfirmPassword)}/>
+                  <InputStyle type={isShowConfirmPassword ? 'text' : 'password'} placeholder='Vui lòng nhập lại mật khẩu' value={confirmPassword} onChange={handleOnchangeConfirmPassword} />
                 </WrappedInput>
                 <ButtonSignIn 
-                  // disabled={!email.length || !password.length}
-                  // type="primary"
+                  disabled={!name || !email.length || !password.length || !confirmPassword.length}
+                  type="primary"
+                  onClick={handleSignUp}
                   >
                   Đăng Ký
                 </ButtonSignIn>
-                <p> Đã có tài khoản? <ButtonLink onClick={handelNavigateLogin}>Đăng Nhập</ButtonLink></p>
+                <p> Đã có tài khoản? <ButtonLink onClick={handleNavigateLogin}>Đăng Nhập</ButtonLink></p>
               </Content>
             </Wrapped>
         </Body>

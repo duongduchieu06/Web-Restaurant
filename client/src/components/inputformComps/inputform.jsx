@@ -1,11 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import {InputText} from './style'
 
 const InputForm = ( props ) => {
-    const [valueInput, setValueInput] = useState("")
-    const {placeholder = "nhập kí tự", ...rests} = props
+    const {placeholder = "Nhập kí tự", ...rests} = props
+    const handleOnchangeInput = (e) => {
+        props.onChange(e.target.value)
+    }
     return (
-        <InputText placeholder={placeholder} valueInput={valueInput} {...rests} />
+        <InputText placeholder={placeholder} value={props.value} {...rests} onChange={handleOnchangeInput} />
     )
 
 }

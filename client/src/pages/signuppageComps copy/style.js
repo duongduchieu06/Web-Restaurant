@@ -90,7 +90,7 @@ export const ButtonSignIn = styled(Button)`
     border: none;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     &:hover {
-        background-color: #fff;
+        background-color: #fff !important;
         color: #F6AC00 !important;
     }
 `

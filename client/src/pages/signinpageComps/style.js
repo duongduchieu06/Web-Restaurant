@@ -40,6 +40,7 @@ export const Wrapped = styled.div`
   align-items: center;
   overflow: auto;
   background-color: #f0f0f0;
+  // gap: 40px
 `;
 
 export const WrappedSlider = styled.div`
@@ -49,6 +50,7 @@ export const WrappedSlider = styled.div`
 
 export const Content = styled.div`
   width: 50%;
+  // margin: 0 40px;
   display: flex;
   flex-direction: column;
   jutify-content: center;
@@ -74,11 +76,17 @@ export const EyeIcon = styled(({ isShowPassword, ...props }) =>
   left: 90%;
 `;
 
+export const Alert = styled.div`
+  width: 80%;
+  color: #FE2020;
+  font-size: 14px;
+`
+
 export const ButtonSignIn = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 26px 0 20px;
+  margin: 20px 0;
   background-color: #f6ac00;
   border-radius: 8px;
   width: 80%;
@@ -89,7 +97,7 @@ export const ButtonSignIn = styled(Button)`
   border: none;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   &:hover {
-    background-color: #fff;
+    background-color: #fff !important;
     color: #f6ac00 !important;
   }
 `;

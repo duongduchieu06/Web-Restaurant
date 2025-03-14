@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Wrapped = styled.div`
     width: 100%;
-    padding-top: 130px;
+    margin-top: 130px;
     overflow-x: hidden;
     background-color: #A11D25;
 `

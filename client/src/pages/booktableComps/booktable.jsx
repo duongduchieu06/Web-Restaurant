@@ -1,12 +1,22 @@
 import React from "react";
+import { Wrapped, Container, WrappedBooking} from './style'
+import SliderComponent from "../../components/sliderComps/Slider";
+import InputForm from "../../components/inputformComps/inputform";
 
 const BooKTable = () => {
 
     return (
         <>
-        <div style={{height: "1000px", backgroundColor: "#000"}}>
-            giới thiệu
-        </div>
+        <Wrapped>
+            <Container>
+                {/* <SliderComponent /> */}
+                <WrappedBooking>
+                    <h1>Đặt Bàn</h1>
+                    <InputForm placeholder='Vui lòng nhập Email'/>
+                    
+                </WrappedBooking>
+            </Container>
+        </Wrapped>
         </>
       );
 };
