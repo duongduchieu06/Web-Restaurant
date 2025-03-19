@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowLeft,
  } from '@fortawesome/free-solid-svg-icons';
-import { Body, ButtonBack, Wrapped, WrappedSlider, Content, WrappedInput, InputStyle, EyeIcon, Alert, ButtonSignIn, ButtonLink,  } from "./style";
+import { Body, ButtonBack, Wrapped, WrappedSlider, Content, WrappedInput, InputStyle, EyeIcon, Alert, ButtonLink, Notification  } from "./style";
 import SliderComponent from "../../components/sliderComps/Slider";
 import slider1 from "../../assest/image/sliderSI1.jpg"
 import slider2 from "../../assest/image/sliderSI2.jpg"
@@ -11,22 +11,53 @@ import slider3 from "../../assest/image/sliderSI3.jpg"
 import slider4 from "../../assest/image/sliderSI4.jpg"
 import slider5 from "../../assest/image/sliderSI5.jpg"
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
 import * as UserService from '../../services/userservice'
 import { useMutationHook } from "../../hook/useMutationHook";
-
+import LoadingButton from "../../components/loadingComps/loading";
+import { jwtDecode } from "jwt-decode";
+import {useDispatch} from 'react-redux'
+import { updateUser } from "../../redux/slices/userSlice";
 
 const SignInPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const navigate = useNavigate()
+  const [isLoadingCustom, setIsLoadingCustom] = useState(false)
+  const [notification, setNotification] = useState(null)
+  const dispatch = useDispatch()
   
   const mutation = useMutationHook(
     data => UserService.loginUser(data)
   )
-  const {data, isLoading} = mutation
+
+  const {data, isSuccess, isError} = mutation
+
+  useEffect(() => {
+    if (data?.status === 'SUCCESS') {
+      setNotification({ type: 'success', message: 'Đăng nhập thành công!'});
+      localStorage.setItem('access_token', data?.access_token)
+      if(data?.access_token) {
+        const decode = jwtDecode(data?.access_token)
+        console.log("decode", decode)
+        if(decode?.id){
+          handleGetDetailUser(decode?.id, data?.access_token)
+        }
+      }
+      setTimeout(() => {
+        setNotification(null);
+        handelNavigateHomePage();
+      }, 3000)
+    } else if (data?.status === 'ERR') {
+      setNotification({ type: 'error', message: 'Đăng nhập thất bại!'})
+      setTimeout(() => {
+        setNotification(null)
+      }, 3000)
+    }
+  }, [isSuccess, isError])
+  const handleGetDetailUser = async (id, token) => {
+    const res = await UserService.getDetailUser(id, token)
+    dispatch(updateUser( {...res?.data, access_token: token}))
+  }
 
   const handleOnchangeEmail = (value) => {
     setEmail(value)
@@ -36,15 +67,23 @@ const SignInPage = () => {
     setPassword(value)
   }
 
-  const handleSignIn = () => {
+    const handleSignIn = () => {
+    setIsLoadingCustom(true);
     mutation.mutate({
       email,
       password
     })
+    setTimeout(() => {
+      setIsLoadingCustom(false);
+    }, 3000);
   }
 
+  const navigate = useNavigate()
   const handelNavigateSignUp = () => {
     navigate('/SignUp')
+  }
+  const handelNavigateHomePage = () => {
+    navigate('/')
   }
   const sliderImages = [slider1, slider2, slider3, slider4, slider5];
 
@@ -68,125 +107,26 @@ const SignInPage = () => {
                 <Alert>
                 {data?.status === 'ERR' && <span>{data?.message}</span>}
                 </Alert>
-                  <ButtonSignIn
+                  <LoadingButton
+                    onClick={handleSignIn}
+                    isLoading={isLoadingCustom}
                     disabled={!email.length || !password.length}
                     type="primary"
-                    onClick={handleSignIn}
                     >
                     Đăng Nhập
-                  </ButtonSignIn>
+                  </LoadingButton>
                 <p> Chưa có tài khoản? <ButtonLink onClick={handelNavigateSignUp}>Đăng Ký</ButtonLink></p>
               </Content>
             </Wrapped>
         </Body>
+      {notification && (
+        <Notification type={notification.type}>
+          {notification.message}
+        </Notification>
+      )}
     </>
   );
 };
 
 export default SignInPage;
 
-
-
-// import React, { useState } from "react";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-// import { Body, ButtonBack, Wrapped, WrappedSlider, Content, WrappedInput, InputStyle, EyeIcon, Alert, ButtonLink } from "./style";
-// import SliderComponent from "../../components/sliderComps/Slider";
-// import slider1 from "../../assest/image/sliderSI1.jpg"
-// import slider2 from "../../assest/image/sliderSI2.jpg"
-// import slider3 from "../../assest/image/sliderSI3.jpg"
-// import slider4 from "../../assest/image/sliderSI4.jpg"
-// import slider5 from "../../assest/image/sliderSI5.jpg"
-// import { useNavigate } from "react-router-dom";
-// import * as UserService from '../../services/userservice'
-// import { useMutationHook } from "../../hook/useMutationHook";
-// import LoadingButton from "../../components/LoadingButton"; // Import component mới
-
-// const SignInPage = () => {
-//   const [isShowPassword, setIsShowPassword] = useState(false)
-//   const [email, setEmail] = useState('')
-//   const [password, setPassword] = useState('')
-//   const [isLoadingCustom, setIsLoadingCustom] = useState(false)
-
-//   const navigate = useNavigate()
-  
-//   const mutation = useMutationHook(
-//     data => UserService.loginUser(data)
-//   )
-//   const {data} = mutation
-
-//   const handleOnchangeEmail = (value) => {
-//     setEmail(value)
-//   }
-
-//   const handleOnchangePassword = (value) => {
-//     setPassword(value)
-//   }
-
-//   const handleSignIn = () => {
-//     setIsLoadingCustom(true);
-//     mutation.mutate({
-//       email,
-//       password
-//     })
-
-//     setTimeout(() => {
-//       setIsLoadingCustom(false);
-//     }, 2000);
-//   }
-
-//   const handelNavigateSignUp = () => {
-//     navigate('/SignUp')
-//   }
-  
-//   const sliderImages = [slider1, slider2, slider3, slider4, slider5];
-
-//   return (
-//     <>
-//         <Body>
-//             <ButtonBack to={"/"}><FontAwesomeIcon icon={faArrowLeft} /></ButtonBack>
-//             <Wrapped>
-//               <WrappedSlider>
-//                 <SliderComponent sliderImages={sliderImages}/>
-//               </WrappedSlider>
-//               <Content>
-//                 <h1>Đăng Nhập</h1>
-//                 <WrappedInput>
-//                   <InputStyle 
-//                     placeholder='Vui lòng nhập Email' 
-//                     value={email} 
-//                     onChange={(e) => handleOnchangeEmail(e.target.value)}
-//                   />
-//                 </WrappedInput>
-//                 <WrappedInput>
-//                   <EyeIcon 
-//                     isShowPassword={isShowPassword} 
-//                     onClick={() => setIsShowPassword(!isShowPassword)} 
-//                   />
-//                   <InputStyle 
-//                     type={isShowPassword ? 'text' : 'password'} 
-//                     placeholder='Vui lòng nhập mật khẩu' 
-//                     value={password} 
-//                     onChange={(e) => handleOnchangePassword(e.target.value)} 
-//                   />
-//                 </WrappedInput>
-//                 <Alert>
-//                   {data?.status === 'ERR' && <span>{data?.message}</span>}
-//                 </Alert>
-//                 <LoadingButton
-//                   onClick={handleSignIn}
-//                   isLoading={isLoadingCustom}
-//                   disabled={!email.length || !password.length}
-//                   type="primary"
-//                 >
-//                   Đăng Nhập
-//                 </LoadingButton>
-//                 <p> Chưa có tài khoản? <ButtonLink onClick={handelNavigateSignUp}>Đăng Ký</ButtonLink></p>
-//               </Content>
-//             </Wrapped>
-//         </Body>
-//     </>
-//   );
-// };
-
-// export default SignInPage;

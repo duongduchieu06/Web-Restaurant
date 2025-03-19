@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router()
 const mealController = require('../controller/MealController');
-const { authMiddleWare } = require("../middleware/authMidleware");
+const { authMiddleWare } = require("../middleware/authMiddleware");
 
 router.post('/CreateMeal' , authMiddleWare, mealController.createMeal)
 router.put('/UpdateMeal/:id', authMiddleWare, mealController.updateMeal)

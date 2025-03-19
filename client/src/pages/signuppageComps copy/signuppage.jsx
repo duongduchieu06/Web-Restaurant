@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowLeft,
  } from '@fortawesome/free-solid-svg-icons';
-import { Body, Wrapped, WrappedSlider, Content, WrappedInput, InputStyle, EyeIcon, ButtonSignIn, ButtonLink, ButtonBack } from "./style";
+import { Body, Wrapped, WrappedSlider, Content, WrappedInput, InputStyle, EyeIcon, Alert, ButtonLink, ButtonBack, Notification } from "./style";
 import SliderComponent from "../../components/sliderComps/Slider";
 import slider1 from "../../assest/image/sliderSI1.jpg"
 import slider2 from "../../assest/image/sliderSI2.jpg"
@@ -11,6 +11,9 @@ import slider3 from "../../assest/image/sliderSI3.jpg"
 import slider4 from "../../assest/image/sliderSI4.jpg"
 import slider5 from "../../assest/image/sliderSI5.jpg"
 import { useNavigate } from "react-router-dom";
+import * as UserService from '../../services/userservice'
+import { useMutationHook } from "../../hook/useMutationHook";
+import LoadingButton from "../../components/loadingComps/loading";
 
 const SignUpPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
@@ -19,6 +22,30 @@ const SignUpPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [isLoadingCustom, setIsLoadingCustom] = useState(false)
+  const [notification, setNotification] = useState(null);
+
+  const mutation = useMutationHook(
+    data => UserService.signUpUser(data)
+  )
+
+  const {data, isSuccess, isError} = mutation
+
+  useEffect(() => {
+    if (data?.status === 'SUCCESS') {
+      setNotification({ type: 'success', message: 'Đăng ký thành công!' });
+      setTimeout(() => {
+        setNotification(null); // Ẩn thông báo sau 3 giây
+        handleNavigateLogin(); // Chuyển hướng sau khi thông báo biến mất
+      }, 3000);
+    } else if (data?.status === 'ERR') {
+      setNotification({ type: 'error', message: 'Đăng ký thất bại. Vui lòng thử lại.' });
+      setTimeout(() => {
+        setNotification(null); // Ẩn sau 3 giây
+      }, 3000);
+    }
+  }, [data]);
+
 
   const handleOnchangeName = (value) => {
     setName(value)
@@ -37,7 +64,16 @@ const SignUpPage = () => {
   }
 
   const handleSignUp = () => {
-
+    setIsLoadingCustom(true);
+    mutation.mutate({
+      name,
+      email,
+      password,
+      confirmPassword,
+    })
+    setTimeout(() => {
+      setIsLoadingCustom(false);
+    }, 2000);
   }
 
   const navigate = useNavigate()
@@ -70,17 +106,26 @@ const SignUpPage = () => {
                   <EyeIcon isShowPassword={isShowConfirmPassword} onClick={() => setIsShowConfirmPassword(!isShowConfirmPassword)}/>
                   <InputStyle type={isShowConfirmPassword ? 'text' : 'password'} placeholder='Vui lòng nhập lại mật khẩu' value={confirmPassword} onChange={handleOnchangeConfirmPassword} />
                 </WrappedInput>
-                <ButtonSignIn 
+                <Alert>
+                  {data?.status === 'ERR' && <span>{data?.message}</span>}
+                </Alert>
+                <LoadingButton
                   disabled={!name || !email.length || !password.length || !confirmPassword.length}
+                  isLoading={isLoadingCustom}
                   type="primary"
                   onClick={handleSignUp}
                   >
                   Đăng Ký
-                </ButtonSignIn>
+                </LoadingButton>
                 <p> Đã có tài khoản? <ButtonLink onClick={handleNavigateLogin}>Đăng Nhập</ButtonLink></p>
               </Content>
             </Wrapped>
         </Body>
+      {notification && (
+        <Notification type={notification.type}>
+          {notification.message}
+        </Notification>
+      )}
     </>
   );
 };

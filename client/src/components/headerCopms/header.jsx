@@ -8,8 +8,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faUserPlus,
-  faRightToBracket
+  faRightToBracket,
+  faUser
  } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from "react-redux";
 
 
 const categories = [
@@ -19,6 +21,8 @@ const categories = [
 ];
 
 const Header = () => {
+  const user = useSelector((state) => state.user)
+  console.log("user", user)
   const navigate = useNavigate()
   const handelNavigateLogin = () => {
     navigate('/SignIn')
@@ -34,14 +38,20 @@ const Header = () => {
         </Link>
         <HeaderContent style={{backgroundColor: '#A31D26', height: '80px'}}>
           <BoxButton>
+            {user?.name ? (
+              <Button><FontAwesomeIcon icon={faUser} />{user.name}</Button>
+            ) : (
+              <>
                 <Button onClick={handelNavigateLogin}>
                   <FontAwesomeIcon icon={faRightToBracket} />
-                    Đăng nhập
+                  Đăng nhập
                 </Button>
                 <Button onClick={handelNavigateSignUP}>
                   <FontAwesomeIcon icon={faUserPlus} />
                     Đăng Ký
                 </Button>
+              </>
+            )}
           </BoxButton>
           <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "10px"}}>
             <ButtonLanguage style={{backgroundImage: `url(${VE})`}} />

@@ -1,9 +1,19 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import bgimg from "../../assest/image/background.jpg"
 import InputForm from "../../components/inputformComps/inputform";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
-import { Button } from "antd";
 import { Link } from "react-router-dom";
+
+const slideIn = keyframes`
+  from {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
 
 export const Body = styled.div`
     display: block;
@@ -15,7 +25,6 @@ export const Body = styled.div`
     margin: 0;
     padding: 0;
     overflow: auto;
-
 `
 
 export const ButtonBack = styled(Link)`
@@ -33,14 +42,16 @@ export const ButtonBack = styled(Link)`
 `
 
 export const Wrapped = styled.div`
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: #fff;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    overflow: auto;
-    background-color: #f0f0f0;
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  background-color: #f0f0f0;
+
+  animation: ${slideIn} 0.5s ease-in-out forwards;
 `
 
 export const WrappedSlider = styled.div`
@@ -75,25 +86,11 @@ export const EyeIcon = styled(({ isShowPassword,  ...props }) =>
   left: 90%;
 `;
 
-export const ButtonSignIn = styled(Button)`
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    margin: 26px 0 20px;
-    background-color: #F6AC00;
-    border-radius: 8px; 
-    width: 80%;
-    height: 45px; 
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    &:hover {
-        background-color: #fff !important;
-        color: #F6AC00 !important;
-    }
-`
+export const Alert = styled.div`
+  width: 80%;
+  color: #fe2020;
+  font-size: 13px;
+`;
 
 export const ButtonLink = styled.span`
     text-decoration: none;
@@ -101,3 +98,26 @@ export const ButtonLink = styled.span`
     font-weight: bold;
     cursor: pointer;
 `
+
+export const Notification = styled.div`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  background-color: ${props => (props.type === 'success' ? '#4caf50' : '#f44336')};
+  color: white;
+  border-radius: 5px;
+  z-index: 9999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+`;

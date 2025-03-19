@@ -12,8 +12,8 @@ const createUser = (newUser) => {
       });
       if (checkUser !== null) {
         resolve({
-          status: "THÔNG BÁO",
-          message: "Email này đã được đăng ký",
+          status: "ERR",
+          message: "Email này đã được đăng ký, vui lòng chọn Email khác",
         });
       }
       const hash = bcrypt.hashSync(password, 10);
@@ -25,7 +25,7 @@ const createUser = (newUser) => {
       });
       if (createUser) {
         resolve({
-          status: "OK",
+          status: "SUCCESS",
           message: "Đăng ký thành công",
           data: createUser,
         });
@@ -45,14 +45,14 @@ const loginUser = (loginUser) => {
       });
       if (checkUser === null) {
         resolve({
-          status: "THÔNG BÁO",
+          status: "ERR",
           message: "Email không khả dụng, vui lòng đăng ký!",
         });
       }
       const comparePassword = bcrypt.compareSync(password, checkUser.password);
       if (!comparePassword) {
         resolve({
-          status: "THẤT BẠI",
+          status: "ERR",
           message: "Mật khẩu không đúng",
         });
       }
@@ -67,7 +67,7 @@ const loginUser = (loginUser) => {
       });
 
       resolve({
-        status: "OK",
+        status: "SUCCESS",
         message: "Đăng nhập thành công",
         access_token,
         refresh_token,

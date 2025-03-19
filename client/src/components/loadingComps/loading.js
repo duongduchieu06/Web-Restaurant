@@ -3,26 +3,25 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { Button } from "antd";
 
-const ButtonStyled = styled.button` 
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+const ButtonStyled = styled(Button)` 
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 100%;
-  
+  align-items: center;
+  margin: 20px 0;
+  background-color: #f6ac00;
+  border-radius: 8px;
+  width: 80%;
+  height: 45px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   &:hover {
-    background-color: #0056b3;
-  }
-  
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+    background-color: #fff !important;
+    color: #f6ac00 !important;
   }
 `;
 
