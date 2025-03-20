@@ -10,6 +10,7 @@ export const Box = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    // shadow: 0 0 10px 0 #000;
 `
 
 export const FooterLogo = styled.div`

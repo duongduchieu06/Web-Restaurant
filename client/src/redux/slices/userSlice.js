@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   name: "",
   email: "",
+  phone: "",
+  avatar: "",
   access_token: "",
 };
 
@@ -11,15 +13,25 @@ export const userSlide = createSlice({
   initialState,
   reducers: {
     updateUser: (state, action) => {
-      const {name, email, access_token } = action.payload
+      const {
+        name = "",
+        email = "",
+        phone = "",
+        avatar = "",
+        access_token = "",
+      } = action.payload;
       state.name = name;
       state.email = email;
+      state.phone = phone;
+      state.avatar = avatar;
       state.access_token = access_token;
     },
     resetUser: (state) => {
-      state.name = '';
-      state.email = '';
-      state.access_token = '';
+      state.name = "";
+      state.email = "";
+      state.phone = "";
+      state.avatar = "";
+      state.access_token = "";
     },
   },
 });

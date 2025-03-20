@@ -49,7 +49,7 @@ export const BoxButton = styled.div`
     background-color: rgba(255, 255, 255, 0.2);
     width: auto;
     height: auto;
-    border-radius: 10px;
+    border-radius: 40px;
     padding: 5px;
     position: relative;
 `
@@ -62,7 +62,7 @@ export const Button = styled.div`
     background-color: #F6AC00;
     width: 150px;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 20px;
     color: #fff;
     cursor: pointer;
     font-size: 15px;

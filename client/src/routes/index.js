@@ -1,9 +1,10 @@
-import HomePage from "../pages/homepgaeComps/homepage"
+import HomePage from "../pages/homePageComps/homepage"
 import MenuPage from "../pages/menuComps/menupage"
-import IntroducePage from "../pages/introducepageComps/introducepage"
-import BooKTable from "../pages/booktableComps/booktable"
+import IntroducePage from "../pages/introducePageComps/introducepage"
+import BooKTable from "../pages/booktablePageComps/booktable"
 import SignInPage from "../pages/signinpageComps/signinpage"
 import SignUpPage from "../pages/signuppageComps copy/signuppage"
+import Profile from "../pages/profileComps/profile"
 
 export const routes = [
     {
@@ -35,6 +36,11 @@ export const routes = [
         path: '/SignUp',
         page: SignUpPage,
         isShowHeader: false
+    },
+    {
+        path: '/ProfileUser',
+        page: Profile,
+        isShowHeader: true
     },
     // {
     //     path: '*',

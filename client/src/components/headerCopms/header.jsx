@@ -24,14 +24,16 @@ const categories = [
 ];
 
 const Header = () => {
+
   const navigate = useNavigate()
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
   const handleLogout = async () => {
     await UserService.logoutUser()
-    localStorage.removeItem('access_token') // Xóa token khi đăng xuất
-    dispatch(resetUser())
+      localStorage.removeItem('access_token') // Xóa token khi đăng xuất
+      dispatch(resetUser())
+      // navigate('/')
   }
 
   const handelNavigateLogin = () => {
@@ -40,9 +42,12 @@ const Header = () => {
   const handelNavigateSignUP = () => {
     navigate('/SignUp')
   }
+  const handleNavigateProfile = () => {
+    navigate('/ProfileUser')
+  }
   const content = (
     <WrapperContentPopup>
-      <ContentPopup>Hồ sơ</ContentPopup>
+      <ContentPopup onClick={handleNavigateProfile}>Hồ sơ</ContentPopup>
       <ContentPopup onClick={handleLogout}>Đăng Xuất</ContentPopup>
     </WrapperContentPopup>
   );
@@ -54,7 +59,7 @@ const Header = () => {
         </Link>
         <HeaderContent style={{backgroundColor: '#A31D26', height: '80px'}}>
           <BoxButton>
-            {user?.name ? (
+            {user?.access_token ? (
               <>
                   <Popover content={content}  trigger="click">
                     <Button>

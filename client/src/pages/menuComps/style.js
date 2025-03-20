@@ -7,14 +7,6 @@ export const Wrapped = styled.div`
     background-color: #A11D25;
 `
 
-// export const Line = styled.div`
-//     content: '';
-//     display: block;
-//     width: 100%;
-//     height: 10px;
-//     background-color: #fff;
-// `
-
 export const WrappedMenu = styled.div`
     max-width: 1270px;
     margin: 0 auto;
