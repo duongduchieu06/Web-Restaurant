@@ -30,12 +30,12 @@ const SignInPage = () => {
     data => UserService.loginUser(data)
   )
 
-  const {data, isSuccess, isError} = mutation
+  const {data} = mutation
 
   useEffect(() => {
     if (data?.status === 'SUCCESS') {
       setNotification({ type: 'success', message: 'Đăng nhập thành công!'});
-      localStorage.setItem('access_token', data?.access_token)
+      localStorage.setItem('access_token', JSON.stringify(data?.access_token))
       if(data?.access_token) {
         const decode = jwtDecode(data?.access_token)
         console.log("decode", decode)
@@ -46,14 +46,14 @@ const SignInPage = () => {
       setTimeout(() => {
         setNotification(null);
         handelNavigateHomePage();
-      }, 3000)
+      }, 2000)
     } else if (data?.status === 'ERR') {
       setNotification({ type: 'error', message: 'Đăng nhập thất bại!'})
       setTimeout(() => {
         setNotification(null)
       }, 3000)
     }
-  }, [isSuccess, isError])
+  }, [data])
   const handleGetDetailUser = async (id, token) => {
     const res = await UserService.getDetailUser(id, token)
     dispatch(updateUser( {...res?.data, access_token: token}))
@@ -75,7 +75,7 @@ const SignInPage = () => {
     })
     setTimeout(() => {
       setIsLoadingCustom(false);
-    }, 3000);
+    }, 2000);
   }
 
   const navigate = useNavigate()

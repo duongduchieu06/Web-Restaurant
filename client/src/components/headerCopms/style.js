@@ -49,8 +49,9 @@ export const BoxButton = styled.div`
     background-color: rgba(255, 255, 255, 0.2);
     width: auto;
     height: auto;
-    border-radius: 40px;
+    border-radius: 10px;
     padding: 5px;
+    position: relative;
 `
 
 export const Button = styled.div`
@@ -61,7 +62,7 @@ export const Button = styled.div`
     background-color: #F6AC00;
     width: 150px;
     height: 100%;
-    border-radius: 20px;
+    border-radius: 5px;
     color: #fff;
     cursor: pointer;
     font-size: 15px;
@@ -73,6 +74,25 @@ export const Button = styled.div`
     &:hover {
         background-color: #fff;
         color: #F6AC00;
+    }
+`
+
+export const WrapperContentPopup = styled.div`
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+`
+
+export const ContentPopup = styled.div`
+    color: #F6AC00;
+    font-weight: 700;
+    border-radius: 2.5px;
+    padding: 3px 8px;
+    cursor: pointer;
+    &:hover {
+        background-color: #F6AC00;
+        color: #fff;
     }
 `
 

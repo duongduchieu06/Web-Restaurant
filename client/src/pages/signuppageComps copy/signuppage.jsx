@@ -29,11 +29,11 @@ const SignUpPage = () => {
     data => UserService.signUpUser(data)
   )
 
-  const {data, isSuccess, isError} = mutation
+  const {data} = mutation
 
   useEffect(() => {
     if (data?.status === 'SUCCESS') {
-      setNotification({ type: 'success', message: 'Đăng ký thành công!' });
+      setNotification({ type: 'success', message: 'Đăng ký thành công! Vui lòng đăng nhập lại' });
       setTimeout(() => {
         setNotification(null); // Ẩn thông báo sau 3 giây
         handleNavigateLogin(); // Chuyển hướng sau khi thông báo biến mất
@@ -73,7 +73,7 @@ const SignUpPage = () => {
     })
     setTimeout(() => {
       setIsLoadingCustom(false);
-    }, 2000);
+    }, 3000);
   }
 
   const navigate = useNavigate()

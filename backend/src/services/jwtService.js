@@ -29,13 +29,12 @@ const refreshTokenJwtService = (token) => {
                     message: 'Lỗi rùi'
                 })
             }
-            const {payload} = user
             const access_token = await genneralAcessToken({
-              id: payload?.id,
-              isAdmin: payload?.isAdmin
+              id: user?.id,
+              isAdmin: user?.isAdmin
             })  
             resolve({
-              status: "-----",
+              status: 'SUCCESS',
               message: "THÀNH CÔNG",
               access_token
             });

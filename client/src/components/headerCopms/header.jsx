@@ -1,5 +1,5 @@
-import React from "react";
-import { HeaderWrapped, HeaderContent, HeaderLogo, ButtonLanguage, BoxButton, Button } from "./style";
+import React, { useState } from "react";
+import { HeaderWrapped, HeaderContent, HeaderLogo, ButtonLanguage, BoxButton, Button, WrapperContentPopup, ContentPopup } from "./style";
 import imagelogo from "../../assest/image/logo.png"
 import VE from "../../assest/image/VE.jpg"
 import EN from "../../assest/image/EN.jpg"
@@ -11,7 +11,10 @@ import {
   faRightToBracket,
   faUser
  } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetUser } from '../../redux/slices/userSlice';
+import { Popover } from "antd";
+import * as UserService from '../../services/userservice'
 
 
 const categories = [
@@ -21,15 +24,28 @@ const categories = [
 ];
 
 const Header = () => {
-  const user = useSelector((state) => state.user)
-  console.log("user", user)
   const navigate = useNavigate()
+  const user = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+
+  const handleLogout = async () => {
+    await UserService.logoutUser()
+    localStorage.removeItem('access_token') // Xóa token khi đăng xuất
+    dispatch(resetUser())
+  }
+
   const handelNavigateLogin = () => {
     navigate('/SignIn')
   }
   const handelNavigateSignUP = () => {
     navigate('/SignUp')
   }
+  const content = (
+    <WrapperContentPopup>
+      <ContentPopup>Hồ sơ</ContentPopup>
+      <ContentPopup onClick={handleLogout}>Đăng Xuất</ContentPopup>
+    </WrapperContentPopup>
+  );
   return(
     <>
       <HeaderWrapped>
@@ -39,7 +55,13 @@ const Header = () => {
         <HeaderContent style={{backgroundColor: '#A31D26', height: '80px'}}>
           <BoxButton>
             {user?.name ? (
-              <Button><FontAwesomeIcon icon={faUser} />{user.name}</Button>
+              <>
+                  <Popover content={content}  trigger="click">
+                    <Button>
+                      <FontAwesomeIcon icon={faUser} />{user.name}
+                    </Button>
+                  </Popover>
+              </>
             ) : (
               <>
                 <Button onClick={handelNavigateLogin}>
