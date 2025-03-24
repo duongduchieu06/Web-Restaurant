@@ -160,6 +160,7 @@ const logoutUser = async (req, res) => {
     });
   } catch (e) {
     return res.status(500).json({
+      status: 'ERR',
       message: 'Lỗi server khi đăng xuất',
       error: e.message,
     });

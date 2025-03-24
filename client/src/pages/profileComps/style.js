@@ -1,5 +1,6 @@
 import { Button } from "antd";
 import styled from "styled-components";
+import LoadingButton from "../../components/loadingComps/loading";
 
 export const Container = styled.div`
     background-color: #F5F5F5;
@@ -51,20 +52,52 @@ export const Label = styled.span`
     font-weight: 600;
 `
 
+export const BoxWrapper = styled.div`
+    display: flex;
+    jutify-content: center;
+    align-items: center;
+    gap: 50px;
+`
+
+export const BoxButtonEdit = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 78%;
+    left: 25%;
+    border: 2px solid #3d3d3d;
+    background-color: #fff;
+    padding: 2px 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    &:hover {
+        color: #fff;
+        background-color: #3d3d3d;
+    }
+`
+
 export const BoxContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
 `
 
+export const Alert = styled.div`
+  width: 80%;
+  color: #fe2020;
+  font-size: 13px;
+`;
+
 export const InforDetail = styled.span`
     font-size: 18px;
     font-weight: 600;
 `
 
-export const ButtonStyled = styled.div` 
+export const ButtonStyled = styled(Button)` 
     width: 120px;
-    padding: 5px 0px;
+    padding: 8px 80px;
     background-color: #000;
     color: #fff;
     font-size: 16px;
@@ -73,16 +106,17 @@ export const ButtonStyled = styled.div`
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     &:hover {
-        background-color: #fff;
-        color: #000;
-        border: 2px solid #000;
+        background-color: #fff !important;
+        color: #000 !important;
+        border: 2px solid #000 !important;
     }
 `
 
-export const ButtonSave = styled.div` 
+export const ButtonSave = styled(LoadingButton)` 
     width: 120px;
-    padding: 5px 0px;
+    padding: 8px 80px;
     background-color: #F6AC00;
     color: #fff;
     font-size: 16px;
@@ -91,10 +125,11 @@ export const ButtonSave = styled.div`
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     &:hover {
-        background-color: #fff;
-        color: #F6AC00;
-        border: 2px solid #F6AC00;
+        background-color: #fff !important;
+        color: #F6AC00 !important;
+        border: 2px solid #F6AC00 !important;
     }
 `
 
@@ -102,6 +137,8 @@ export const Popup = styled.div`
     position: fixed;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
     top: 50%;
     left: 50%;
@@ -122,3 +159,27 @@ export const BackgroundPopup = styled(Button)`
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 `
+
+
+export const Notification = styled.div`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  background-color: ${props => (props.type === 'success' ? '#4caf50' : '#f44336')};
+  color: white;
+  border-radius: 5px;
+  z-index: 9999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+`;

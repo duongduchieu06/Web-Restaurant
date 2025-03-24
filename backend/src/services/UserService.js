@@ -86,15 +86,13 @@ const updateUser = (id, data) => {
       });
       if (checkUser === null) {
         resolve({
-          status: "THÔNG BÁO",
-          message: "Email không khả dụng, vui lòng đăng ký!",
+          status: "ERR",
+          message: "Không có người dùng này",
         });
       }
-
       const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
-
       resolve({
-        status: "OK",
+        status: "SUCCESS",
         message: "Cập nhật thành công",
         data: updatedUser,
       });
@@ -112,7 +110,7 @@ const deleteUser = (id) => {
       });
       if (checkUser === null) {
         resolve({
-          status: "THÔNG BÁO",
+          status: "ERR",
           message: "Không có người dùng này!",
         });
       }
@@ -120,7 +118,7 @@ const deleteUser = (id) => {
       await User.findByIdAndDelete(id);
 
       resolve({
-        status: "OK",
+        status: "SUCCESS",
         message: "Xóa thành công!",
       });
     } catch (e) {
@@ -134,7 +132,7 @@ const getAll = () => {
     try {
       const alluser = await User.find();
       resolve({
-        status: "-----",
+        status: "SUCCESS",
         message: "DANH SÁCH USER",
         data: alluser
       });
@@ -152,12 +150,12 @@ const getUser = (id) => {
       });
       if (user === null) {
         resolve({
-          status: "THÔNG BÁO",
+          status: "ERR",
           message: "Không có người dùng này!",
         });
       }
       resolve({
-        status: "-----",
+        status: "SUCCESS",
         message: "NGƯỜI DÙNG:",
         data: user
       });

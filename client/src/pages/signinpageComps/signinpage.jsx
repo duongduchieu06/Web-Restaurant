@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowLeft,
  } from '@fortawesome/free-solid-svg-icons';
-import { Body, ButtonBack, Wrapped, WrappedSlider, Content, WrappedInput, InputStyle, EyeIcon, Alert, ButtonLink, Notification  } from "./style";
+import { Body, ButtonBack, Wrapped, WrappedSlider, Content, WrappedInput, InputStyle, EyeIcon, Alert, ButtonStyled, ButtonLink, Notification  } from "./style";
 import SliderComponent from "../../components/sliderComps/Slider";
 import slider1 from "../../assest/image/sliderSI1.jpg"
 import slider2 from "../../assest/image/sliderSI2.jpg"
@@ -13,7 +13,6 @@ import slider5 from "../../assest/image/sliderSI5.jpg"
 import { useNavigate } from "react-router-dom";
 import * as UserService from '../../services/userservice'
 import { useMutationHook } from "../../hook/useMutationHook";
-import LoadingButton from "../../components/loadingComps/loading";
 import { jwtDecode } from "jwt-decode";
 import {useDispatch} from 'react-redux'
 import { updateUser } from "../../redux/slices/userSlice";
@@ -29,7 +28,6 @@ const SignInPage = () => {
   const mutation = useMutationHook(
     data => UserService.loginUser(data)
   )
-
   const {data} = mutation
 
   useEffect(() => {
@@ -38,7 +36,7 @@ const SignInPage = () => {
       localStorage.setItem('access_token', JSON.stringify(data?.access_token))
       if(data?.access_token) {
         const decode = jwtDecode(data?.access_token)
-        console.log("decode", decode)
+        // console.log("decode", decode)
         if(decode?.id){
           handleGetDetailUser(decode?.id, data?.access_token)
         }
@@ -107,14 +105,14 @@ const SignInPage = () => {
                 <Alert>
                 {data?.status === 'ERR' && <span>{data?.message}</span>}
                 </Alert>
-                  <LoadingButton
-                    onClick={handleSignIn}
-                    isLoading={isLoadingCustom}
-                    disabled={!email.length || !password.length}
-                    type="primary"
-                    >
-                    Đăng Nhập
-                  </LoadingButton>
+                <ButtonStyled
+                  onClick={handleSignIn}
+                  isLoading={isLoadingCustom}
+                  disabled={!email.length || !password.length}
+                  type="primary"
+                  >
+                  Đăng Nhập
+                </ButtonStyled>
                 <p> Chưa có tài khoản? <ButtonLink onClick={handelNavigateSignUp}>Đăng Ký</ButtonLink></p>
               </Content>
             </Wrapped>

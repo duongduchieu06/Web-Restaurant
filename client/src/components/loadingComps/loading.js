@@ -9,15 +9,8 @@ const ButtonStyled = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
   background-color: #f6ac00;
-  border-radius: 8px;
-  width: 80%;
-  height: 45px;
   color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   &:hover {
     background-color: #fff !important;

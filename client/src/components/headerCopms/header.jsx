@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faUserPlus,
   faRightToBracket,
+  faCircleUser,
   faUser
  } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from "react-redux";
@@ -61,11 +62,25 @@ const Header = () => {
           <BoxButton>
             {user?.access_token ? (
               <>
-                  <Popover content={content}  trigger="click">
-                    <Button>
-                      <FontAwesomeIcon icon={faUser} />{user.name}
-                    </Button>
-                  </Popover>
+                {user.avatar ? (
+                  <>
+                    <img onClick={handleNavigateProfile} src={user.avatar} alt="Avatar" style={{ width: '40px', height: '40px', borderRadius: '50%', cursor: 'pointer'}} />
+                    <Popover content={content}  trigger="click">
+                      <Button>
+                        {user.name}
+                      </Button>
+                    </Popover>
+                  </>
+                ) : (
+                  <>
+                    <Popover content={content}  trigger="click">
+                      <Button>
+                        <FontAwesomeIcon icon={faUser} />
+                        {user.name}
+                      </Button>
+                    </Popover>
+                  </>
+                )}
               </>
             ) : (
               <>

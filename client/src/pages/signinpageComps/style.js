@@ -3,6 +3,7 @@ import bgimg from "../../assest/image/background.jpg";
 import InputForm from "../../components/inputformComps/inputform";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import LoadingButton from "../../components/loadingComps/loading";
 
 const slideIn = keyframes`
   from {
@@ -92,6 +93,16 @@ export const Alert = styled.div`
   color: #fe2020;
   font-size: 13px;
 `;
+
+export const ButtonStyled = styled(LoadingButton)`
+  margin: 20px 0;
+  width: 80%;
+  height: 45px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+`
 
 export const ButtonLink = styled.span`
   text-decoration: none;

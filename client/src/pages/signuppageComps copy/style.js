@@ -3,6 +3,7 @@ import bgimg from "../../assest/image/background.jpg"
 import InputForm from "../../components/inputformComps/inputform";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import LoadingButton from "../../components/loadingComps/loading";
 
 const slideIn = keyframes`
   from {
@@ -28,17 +29,17 @@ export const Body = styled.div`
 `
 
 export const ButtonBack = styled(Link)`
-    display: block;
-    text-decoration: none;
-    position: absolute;
-    top: 40px;
-    left: 200px;
-    color: #fff;
-    font-size: 30px;
-    transition:  color 0.3s ease-in-out;
-    &:hover {
-        color: #F6AC00 !important;
-    }
+  display: block;
+  text-decoration: none;
+  position: absolute;
+  top: 40px;
+  left: 200px;
+  color: #fff;
+  font-size: 30px;
+  transition:  color 0.3s ease-in-out;
+  &:hover {
+      color: #F6AC00 !important;
+  }
 `
 
 export const Wrapped = styled.div`
@@ -90,6 +91,16 @@ export const Alert = styled.div`
   width: 80%;
   color: #fe2020;
   font-size: 13px;
+`;
+
+export const ButtonStyled = styled(LoadingButton)`
+  margin: 20px 0;
+  width: 80%;
+  height: 45px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
 `;
 
 export const ButtonLink = styled.span`

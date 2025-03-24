@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowLeft,
  } from '@fortawesome/free-solid-svg-icons';
-import { Body, Wrapped, WrappedSlider, Content, WrappedInput, InputStyle, EyeIcon, Alert, ButtonLink, ButtonBack, Notification } from "./style";
+import { Body, Wrapped, WrappedSlider, Content, WrappedInput, InputStyle, EyeIcon, Alert, ButtonStyled, ButtonLink, ButtonBack, Notification } from "./style";
 import SliderComponent from "../../components/sliderComps/Slider";
 import slider1 from "../../assest/image/sliderSI1.jpg"
 import slider2 from "../../assest/image/sliderSI2.jpg"
@@ -13,7 +13,6 @@ import slider5 from "../../assest/image/sliderSI5.jpg"
 import { useNavigate } from "react-router-dom";
 import * as UserService from '../../services/userservice'
 import { useMutationHook } from "../../hook/useMutationHook";
-import LoadingButton from "../../components/loadingComps/loading";
 
 const SignUpPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
@@ -28,7 +27,6 @@ const SignUpPage = () => {
   const mutation = useMutationHook(
     data => UserService.signUpUser(data)
   )
-
   const {data} = mutation
 
   useEffect(() => {
@@ -109,14 +107,14 @@ const SignUpPage = () => {
                 <Alert>
                   {data?.status === 'ERR' && <span>{data?.message}</span>}
                 </Alert>
-                <LoadingButton
+                <ButtonStyled
                   disabled={!name || !email.length || !password.length || !confirmPassword.length}
                   isLoading={isLoadingCustom}
                   type="primary"
                   onClick={handleSignUp}
                   >
                   Đăng Ký
-                </LoadingButton>
+                </ButtonStyled>
                 <p> Đã có tài khoản? <ButtonLink onClick={handleNavigateLogin}>Đăng Nhập</ButtonLink></p>
               </Content>
             </Wrapped>
