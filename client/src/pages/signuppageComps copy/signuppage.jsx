@@ -44,7 +44,6 @@ const SignUpPage = () => {
     }
   }, [data]);
 
-
   const handleOnchangeName = (value) => {
     setName(value)
   }

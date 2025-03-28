@@ -1,10 +1,17 @@
 import styled from "styled-components";
 import anh from "../../assest/image/hihi.jpg";
 
+
+
 export const Name = styled.div`
   font-weight: bold;
   font-size: 20px;
   color: #fff;
+`;
+export const Type = styled.div`
+  font-weight: bold;
+  font-size: 18px;
+  color: #f6ac00;
 `;
 
 export const Wrapped = styled.div`
@@ -14,7 +21,7 @@ export const Wrapped = styled.div`
   gap: 20px;
   transition: color 0.3s ease-in-out;
   &:hover ${Name} {
-    color: #f6ac00;
+    color:rgb(255, 179, 0);
   }
 `;
 
@@ -32,6 +39,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 60%;
 `;
 
 export const Description = styled.div`
@@ -43,3 +51,4 @@ export const Price = styled.div`
   font-size: 18px;
   color: #fff;
 `;
+

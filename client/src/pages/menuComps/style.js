@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Wrapped = styled.div`
+export const Container = styled.div`
     width: 100%;
     margin-top: 130px;
     overflow-x: hidden;
@@ -20,6 +20,23 @@ export const Title = styled.span`
     font-weight: 700;
     color: #fff;
     padding-top: 45px;
+`
+
+export const TextBehind = styled.div`
+    font-size: 250px;
+    font-weight: 700;
+    opacity: 0.07;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // z-index: 1;
+`
+
+export const Wrapped = styled.div`
+    width: 100%;
+    margin-top: 70px;
 `
 
 export const WrappedContent = styled.div`

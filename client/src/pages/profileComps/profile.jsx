@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Content, Wrapped, Infor, Label, BoxWrapper, BoxButtonEdit, BoxContent, Alert, InforDetail, ButtonStyled, ButtonSave, Popup, Notification } from './style'
+import { Container, Content, Wrapped, Infor, ImageAvatar, Label, BoxWrapper, BoxButtonEdit, BoxContent, Alert, InforDetail, ButtonStyled, ButtonSave, Popup, Notification } from './style'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser, faUserPen, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
@@ -98,14 +98,14 @@ const Profile = () => {
                 <Content>
                     <Infor>
                         {avatar ? (
-                            <img src={avatar} alt="Avatar" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />
+                            <ImageAvatar src={avatar} alt="Avatar" />
                         ) : (
                         <FontAwesomeIcon style={{ fontSize: '200px', position: 'relative' }} icon={faCircleUser} />
                         )}
                         <InforDetail>{user.name}</InforDetail>
                         <InforDetail>{user.email}</InforDetail>
                         <InforDetail>{user.phone}</InforDetail>
-                        <ButtonStyled onClick={handleEditClick}> <FontAwesomeIcon icon={faUserPen} />Sửa Hồ Sơ</ButtonStyled>
+                        <ButtonStyled style={{margin: '40px auto 0'}} onClick={handleEditClick}> <FontAwesomeIcon icon={faUserPen} />Sửa Hồ Sơ</ButtonStyled>
                     </Infor>
                 </Content>
             </Wrapped>
@@ -114,7 +114,7 @@ const Profile = () => {
                     <h2>SỬA ĐỔI THÔNG TIN NGƯỜI DÙNG<span style={{ color: '#F6AC00'}}>#{user.name}</span></h2>                   
                     <BoxWrapper>
                         {avatar ? (
-                            <img src={avatar} alt="Avatar" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />
+                            <ImageAvatar src={avatar} alt="Avatar" />
                         ) : (
                         <FontAwesomeIcon style={{ fontSize: '200px', position: 'relative' }} icon={faCircleUser} />
                         )}
@@ -139,7 +139,11 @@ const Profile = () => {
                             </Alert>
                             <div style={{ display: 'flex', gap: '40px', marginTop: '20px'}}>
                                 <ButtonStyled onClick={handleClosePopup}>ĐÓNG</ButtonStyled>
-                                <ButtonSave isLoading={isLoadingCustom} disabled={!name || !email.length || !phone.length} onClick={handleUpdate}>LƯU</ButtonSave>
+                                <ButtonSave 
+                                isLoading={isLoadingCustom} 
+                                disabled={!name || !email.length || !phone.length} 
+                                type="primary"
+                                onClick={handleUpdate}>LƯU</ButtonSave>
                             </div>
                         </BoxContent>
                     </BoxWrapper>

@@ -1,20 +1,28 @@
 import React from "react";
-import {Wrapped, Image, Content, Name, Description, Price} from "./style"
+import {Wrapped, Image, Content, BoxName, Name, Description, Price, Type} from "./style"
 
-const BoxContent = () => {
+const BoxContent = (props) => {
+
+  const {
+    description,
+    name,
+    price,
+    type,
+    image,
+  } = props
   return (  
     <>
       <Wrapped>
         <Image />
         <Content>
           <Name>
-            Viên Mac ‘N’ Cheese
+            {name}
           </Name>
           <Description>
-            Viên Mac ‘N’ Cheese chiên giòn nhân thịt xông khói dùng kèm xốt BBQ mayo
+            {description}
           </Description>
           <Price>
-            100.000 k
+            {price}
           </Price>
         </Content>
       </Wrapped>

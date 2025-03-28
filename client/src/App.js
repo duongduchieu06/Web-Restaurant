@@ -7,11 +7,12 @@ import { useQuery } from '@tanstack/react-query';
 import { isJsonString } from './utils';
 import { jwtDecode } from 'jwt-decode';
 import * as UserService from './services/userservice'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from './redux/slices/userSlice';
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user)
 
   useEffect(() => {
     const {storageData, decoded} = handleDecoded()
@@ -68,7 +69,9 @@ function App() {
           <Routes>
             {routes.map((route) => {
               const Page = route.page;
+              const isCheckAuth = !route.isPrivate || user.isAdmin
               const Layout = route.isShowHeader ? DefaultComponent : Fragment
+              if (!isCheckAuth) return null;
               return (
                 <Route
                   key={route.path}

@@ -68,10 +68,24 @@ const updateUser = async (req, res) => {
   try {
     const userId = req.params.id;
     const data = req.body;
+    const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    const phoneReg = /^\d+$/;
+    const isCheckEmail = reg.test(data.email);
+    const isCheckPhone = data.phone && phoneReg.test(data.phone) && data.phone.length > 9;
     if (!userId) {
       return res.status(200).json({
         status: "ERR",
         message: "Không tìm thấy id người dùng  ",
+      });
+    } else if (!isCheckEmail) {
+      return res.status(200).json({
+        status: "ERR",
+        message: "Yêu cầu nhập đúng Email!",
+      });
+    } else if ( !isCheckPhone ){
+      return res.status(200).json({
+        status: "ERR",
+        message: "Yêu cầu nhập đúng số điện thoại",
       });
     }
     const response = await UserService.updateUser(userId, data);

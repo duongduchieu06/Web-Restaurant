@@ -3,7 +3,7 @@ const JwtService = require("../services/jwtService");
 
 const createMeal = async (req, res) => {
   try {
-    const { name, image, type, price, desciption } = req.body;
+    const { name, image, type, price, description } = req.body;
     console.log("req.body", req.body);
     if (!name || !image || !type || !price) {
       return res.status(200).json({

@@ -102,7 +102,7 @@ export const ButtonStyled = styled(LoadingButton)`
   font-size: 18px;
   font-weight: bold;
   border: none;
-`
+`;
 
 export const ButtonLink = styled.span`
   text-decoration: none;
@@ -111,13 +111,13 @@ export const ButtonLink = styled.span`
   cursor: pointer;
 `;
 
-
 export const Notification = styled.div`
   position: fixed;
   top: 20px;
   right: 20px;
   padding: 15px 20px;
-  background-color: ${props => (props.type === 'success' ? '#4caf50' : '#f44336')};
+  background-color: ${(props) =>
+    props.type === "success" ? "#4caf50" : "#f44336"};
   color: white;
   border-radius: 5px;
   z-index: 9999;

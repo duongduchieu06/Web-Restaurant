@@ -5,6 +5,7 @@ import BooKTable from "../pages/booktablePageComps/booktable"
 import SignInPage from "../pages/signinpageComps/signinpage"
 import SignUpPage from "../pages/signuppageComps copy/signuppage"
 import Profile from "../pages/profileComps/profile"
+import AdminPage from "../pages/AdminPageComps/adminpage"
 
 export const routes = [
     {
@@ -41,6 +42,12 @@ export const routes = [
         path: '/ProfileUser',
         page: Profile,
         isShowHeader: true
+    },
+    {
+        path: '/Admin',
+        page: AdminPage ,
+        isShowHeader: false,
+        isPrivate: true,
     },
     // {
     //     path: '*',

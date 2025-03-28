@@ -45,11 +45,17 @@ const Header = () => {
   }
   const handleNavigateProfile = () => {
     navigate('/ProfileUser')
+  } 
+  const handleNavigateAdmin = () => {
+    navigate('/Admin')
   }
   const content = (
     <WrapperContentPopup>
       <ContentPopup onClick={handleNavigateProfile}>Hồ sơ</ContentPopup>
       <ContentPopup onClick={handleLogout}>Đăng Xuất</ContentPopup>
+      {user?.isAdmin && (
+        <ContentPopup onClick={handleNavigateAdmin}>Quản lý</ContentPopup>
+      )}
     </WrapperContentPopup>
   );
   return(
