@@ -12,6 +12,18 @@ import * as MealService from '../../services/mealservice';
 const MenuPage = () => {
   const sliderImages = [slider1, slider2, slider3];
   
+  // Define a color mapping for meal types
+  const typeColors = {
+    burger: '#A11D25', // Light red for Burger
+    salad: '#18441A',  // Light green for Salad
+    starter: '#d1ecf1', // Light blue for Starter
+    appetizer: '#f8d7da',
+    main: '#d4edda',
+    dessert: '#d1ecf1',
+    drink: '#fff3cd',
+    // Add more types and colors as needed
+  };
+
   const fetchMealAll = async () => {
     const res = await MealService.getAllMeal()
     console.log("res", res)
@@ -39,25 +51,30 @@ const MenuPage = () => {
             <Title style={{ fontSize: '200px'}}>MENU</Title>
             <TextBehind>CHOPS</TextBehind>
           </div>
-          <Title>Choose your nearest restaurant</Title>
-          
+          <Title>Choose your best dishes</Title>
           {mealTypes?.map((type) => (
-            <Wrapped key={type}>
-              <Title style={{ color: '#f6ac00' }}>{type.toUpperCase()}</Title>
-              <WrappedContent>
-                {meal?.data
-                  ?.filter(mealItem => mealItem.type === type)
-                  .map((mealItem) => (
-                    <BoxContent 
-                      key={mealItem._id} 
-                      description={mealItem.description} 
-                      name={mealItem.name} 
-                      price={mealItem.price} 
-                      image={mealItem.image}
-                    />
-                  ))}
-              </WrappedContent>
+            <>
+              <Wrapped 
+                key={type} 
+                style={{ backgroundColor: typeColors[type.toLowerCase()] || '#ffffff' }} // Apply background color
+              >
+                <Title style={{ margin: '130px',  color: '#f6ac00' }}>{type.toUpperCase()}</Title>
+                <WrappedContent>
+                  {meal?.data
+                    ?.filter(mealItem => mealItem.type === type)
+                    .map((mealItem) => (
+                      <BoxContent 
+                        key={mealItem._id} 
+                        description={mealItem.description} 
+                        name={mealItem.name} 
+                        price={mealItem.price} 
+                        image={mealItem.image}
+                      />
+                    ))}
+                </WrappedContent>
             </Wrapped>
+            <Line />
+            </>
           ))}
         </WrappedMenu>
       </Container>

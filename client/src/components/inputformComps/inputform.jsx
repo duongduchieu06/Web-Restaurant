@@ -12,4 +12,4 @@ const InputForm = ( props ) => {
 
 }
 
-export default InputForm 
+export default InputForm  

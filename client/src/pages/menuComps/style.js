@@ -5,11 +5,10 @@ export const Container = styled.div`
     margin-top: 130px;
     overflow-x: hidden;
     background-color: #A11D25;
+    padding-bottom: 40px;
 `
 
 export const WrappedMenu = styled.div`
-    max-width: 1270px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +18,7 @@ export const Title = styled.span`
     font-size: 40px;
     font-weight: 700;
     color: #fff;
-    padding-top: 45px;
+    
 `
 
 export const TextBehind = styled.div`
@@ -36,14 +35,15 @@ export const TextBehind = styled.div`
 
 export const Wrapped = styled.div`
     width: 100%;
-    margin-top: 70px;
+    padding: 45px 0;
 `
 
 export const WrappedContent = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
-    margin-top: 40px;
+    max-width: 1270px;
+    margin: 30px auto;
 `
 
 

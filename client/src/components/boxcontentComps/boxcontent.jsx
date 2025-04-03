@@ -13,7 +13,7 @@ const BoxContent = (props) => {
   return (  
     <>
       <Wrapped>
-        <Image />
+        <Image style={{ backgroundImage: `url(${image})` }} />
         <Content>
           <Name>
             {name}
