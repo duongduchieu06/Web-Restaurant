@@ -40,18 +40,16 @@ const loginUser = (loginUser) => {
   return new Promise(async (resolve, reject) => {
     const { email, password } = loginUser;
     try {
-      const checkUser = await User.findOne({
-        email: email,
-      });
-      if (checkUser === null) {
-        resolve({
+      const checkUser = await User.findOne({ email });
+      if (!checkUser) {
+        return resolve({
           status: "ERR",
           message: "Email không khả dụng, vui lòng đăng ký!",
         });
       }
       const comparePassword = bcrypt.compareSync(password, checkUser.password);
       if (!comparePassword) {
-        resolve({
+        return resolve({
           status: "ERR",
           message: "Mật khẩu không đúng",
         });
@@ -60,20 +58,22 @@ const loginUser = (loginUser) => {
         id: checkUser.id,
         isAdmin: checkUser.isAdmin,
       });
-
       const refresh_token = await genneralRefreshToken({
         id: checkUser.id,
         isAdmin: checkUser.isAdmin,
       });
-
-      resolve({
+      return resolve({
         status: "SUCCESS",
         message: "Đăng nhập thành công",
         access_token,
         refresh_token,
       });
     } catch (e) {
-      reject(e);
+        return reject({
+        status: "ERR",
+        message: "Lỗi server khi đăng nhập",
+        error: e.message,
+      });
     }
   });
 };

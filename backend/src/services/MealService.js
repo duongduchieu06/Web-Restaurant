@@ -6,13 +6,6 @@ const createMeal = (newMeal) => {
   return new Promise(async (resolve, reject) => {
     const { name, image, type, price, description } = newMeal;
     try {
-      // if (!name || !price) {
-      //   resolve({
-      //     status: "ERR",
-      //     message: "Vui lòng cung cấp đầy đủ tên và giá món ăn"
-      //   });
-      //   return;
-      // }
       const checkMeal = await Meal.findOne({
         name: name,
       });
@@ -54,10 +47,14 @@ const updateMeal = (id, data) => {
           status: "ERR",
           message: "Khum có món ăn này, hãy thêm món ăn nếu bạn cần!",
         });
+      } else if (!data.name || !data.price) {
+        resolve({
+          status: "ERR",
+          message: "Vui lòng cung cấp đầy đủ tên và giá món ăn"
+        });
+        return;
       }
-
       const updatedMeal = await Meal.findByIdAndUpdate(id, data, { new: true });
-
       resolve({
         status: "SUCCESS",
         message: "Cập nhật thành công",

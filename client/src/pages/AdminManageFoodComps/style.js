@@ -45,6 +45,7 @@ export const BoxInput = styled.div`
 export const Label = styled.span`
   font-size: 18px;
   font-weight: 600;
+  // width: 25%;
 `;
 export const InputStyled = styled(InputForm)`
   width: 80%;
@@ -54,8 +55,10 @@ export const SelecteStyled = styled.select`
   border: none;
   padding: 0 6px;
 `;
-export const InputFileStyled = styled.input`
+export const InputFileStyled = styled.div`
   width: 80%;
+  display: flex;
+  align-items: center;
 `;
 export const Alert = styled.div`
   width: 80%;
@@ -69,7 +72,7 @@ export const Popup = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 500px;
+  width: 800px;
   height: 500px;
   gap: 20px;
   top: 50%;
@@ -81,6 +84,12 @@ export const Popup = styled.div`
   z-index: 1001;
   border-radius: 10px;
 `;
+
+export const WrappedButton = styled.div`
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+`
 
 export const ButtonStyled = styled(Button)`
   width: 120px;
@@ -143,4 +152,19 @@ export const Notification = styled.div`
       opacity: 1;
     }
   }
+`;
+
+
+
+export const WrapperEdit = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 20px;
+  padding: 20px;
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  // z-index: 1001;
+  // border-radius: 10px;
 `;

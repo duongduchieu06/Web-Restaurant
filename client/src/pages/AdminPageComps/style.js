@@ -12,7 +12,7 @@ export const WrappedNavi = styled.div`
     justify-content: center:
     align-items: center;
     width: 250px;
-    height: 100%;
+    height: 100vh;
     background-color: #404040;
     position: fixed;
     margin: 10px 0px 0px ;

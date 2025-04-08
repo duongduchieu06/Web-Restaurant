@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { axiosJWT } from './userservice';
 
 export const getAllMeal = async () => {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/meal/GetAll`);
@@ -20,4 +21,21 @@ export const getDetailMeal = async (id) => {
     return res.data;
 };
 
+export const updateMeal = async (id, data, access_token) => {
+    const res = await axiosJWT.put(`${process.env.REACT_APP_API_URL}/meal/UpdateMeal/${id}`, data , {
+        headers: {
+            token: `Bearer ${access_token}`,
+        }
+    });
+    return res.data;
+};
 
+
+export const deleteMeal = async (id, access_token) => {
+    const res = await axiosJWT.delete(`${process.env.REACT_APP_API_URL}/meal/DeleteMeal/${id}`, {
+        headers: {
+            token: `Bearer ${access_token}`,
+        }
+    });
+    return res.data;
+};

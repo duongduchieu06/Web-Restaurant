@@ -26,34 +26,49 @@ const SignInPage = () => {
   const dispatch = useDispatch()
   
   const mutation = useMutationHook(
-    data => UserService.loginUser(data)
-  )
-  const {data} = mutation
+    async (data) => {
+      try {
+        const response = await UserService.loginUser(data);
+        return response;
+      } catch (error) {
+        console.error("API Error:", error.response?.data || error.message);
+        return {
+          status: "ERR",
+          message: error.response?.data?.message || "Đã xảy ra lỗi khi kết nối đến server.",
+        };
+      }
+    }
+  );
+
+  const { data } = mutation; // Chỉ lấy `data` từ mutation
 
   useEffect(() => {
-    if (data?.status === 'SUCCESS') {
-      setNotification({ type: 'success', message: 'Đăng nhập thành công!'});
-      localStorage.setItem('access_token', JSON.stringify(data?.access_token))
-      if(data?.access_token) {
-        const decode = jwtDecode(data?.access_token)
-        // console.log("decode", decode)
-        if(decode?.id){
-          handleGetDetailUser(decode?.id, data?.access_token)
+    console.log("Mutation Data:", data); // Log dữ liệu từ mutation
+    if (data) {
+      if (data.status === 'SUCCESS') {
+        setNotification({ type: 'success', message: 'Đăng nhập thành công!' });
+        localStorage.setItem('access_token', JSON.stringify(data.access_token));
+        if (data.access_token) {
+          const decode = jwtDecode(data.access_token);
+          if (decode?.id) {
+            handleGetDetailUser(decode.id, data.access_token);
+          }
         }
+        setTimeout(() => {
+          setNotification(null);
+          handelNavigateHomePage();
+        }, 2000);
+      } else if (data.status === 'ERR') {
+        setNotification({ type: 'error', message: data.message || 'Đăng nhập thất bại!' });
+        setTimeout(() => {
+          setNotification(null);
+        }, 3000);
       }
-      setTimeout(() => {
-        setNotification(null);
-        handelNavigateHomePage();
-      }, 2000)
-    } else if (data?.status === 'ERR') {
-      setNotification({ type: 'error', message: 'Đăng nhập thất bại!'})
-      setTimeout(() => {
-        setNotification(null)
-      }, 3000)
     }
-  }, [data])
+  }, [data]); // Chỉ phụ thuộc vào `data`
+
   const handleGetDetailUser = async (id, token) => {
-    const res = await UserService.getDetailUser(id, token)
+  const res = await UserService.getDetailUser(id, token)
     dispatch(updateUser( {...res?.data, access_token: token}))
   }
 
@@ -84,6 +99,8 @@ const SignInPage = () => {
     navigate('/')
   }
   const sliderImages = [slider1, slider2, slider3, slider4, slider5];
+
+  console.log("data?.status", data?.status, data?.message)
 
   return (
     <>
