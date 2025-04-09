@@ -4,13 +4,12 @@ import anh from "../../assest/image/hihi.jpg";
 
 
 export const Name = styled.div`
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: 700;
+  font-size: 24px;
   color: #fff;
 `;
 export const Type = styled.div`
   font-weight: bold;
-  font-size: 18px;
   color: #f6ac00;
 `;
 
@@ -27,7 +26,7 @@ export const Wrapped = styled.div`
 
 export const Image = styled.div`
   width: 250px;
-  height: 150px;
+  height: 200px;
   border-radius: 10px;
   background-image: url(${anh});
   background-size: cover;
@@ -38,17 +37,18 @@ export const Image = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   width: 60%;
 `;
 
 export const Description = styled.div`
   color: #fff;
+  font-size:16px; 
 `;
 
 export const Price = styled.div`
   font-weight: bold;
-  font-size: 18px;
+  font-size: 24px;
   color: #fff;
 `;
 

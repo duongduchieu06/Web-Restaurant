@@ -90,7 +90,7 @@ export const ContentPopup = styled.div`
   border-radius: 2.5px;
   padding: 3px 8px;
   cursor: pointer;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   &:hover {
     background-color: #f6ac00;
     color: #fff;

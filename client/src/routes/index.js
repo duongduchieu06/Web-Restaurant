@@ -6,6 +6,9 @@ import SignInPage from "../pages/signinpageComps/signinpage"
 import SignUpPage from "../pages/signuppageComps copy/signuppage"
 import Profile from "../pages/profileComps/profile"
 import AdminPage from "../pages/AdminPageComps/adminpage"
+import AdminManageTable from "../pages/AdminManageTableComps/adminmanagetable"
+import AdminManageFood from "../pages/AdminManageFoodComps/adminmanagefood"
+import AdminManageUser from "../pages/AdminManageUserComps/adminmanageuser"
 
 export const routes = [
     {
@@ -45,12 +48,30 @@ export const routes = [
     },
     {
         path: '/Admin',
-        page: AdminPage ,
+        page: () => <div>Welcome to Admin Dashboard</div>, // Placeholder for admin dashboard
         isShowHeader: false,
         isPrivate: true,
+        isAdminRoute: true,
     },
-    // {
-    //     path: '*',
-    //     page: NotFoundPage
-    // }
-]
+    {
+        path: '/Admin/ManageFood',
+        page: AdminManageFood,
+        isShowHeader: false,
+        isPrivate: true,
+        isAdminRoute: true,
+    },
+    {
+        path: '/Admin/ManageTables',
+        page: AdminManageTable,
+        isShowHeader: false,
+        isPrivate: true,
+        isAdminRoute: true,
+    },
+    {
+        path: '/Admin/ManageUsers',
+        page: AdminManageUser,
+        isShowHeader: false,
+        isPrivate: true,
+        isAdminRoute: true,
+    },
+];

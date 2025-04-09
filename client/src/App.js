@@ -9,6 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 import * as UserService from './services/userservice'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from './redux/slices/userSlice';
+import AdminPage from './pages/AdminPageComps/adminpage';
 
 function App() {
   const dispatch = useDispatch();
@@ -69,9 +70,25 @@ function App() {
           <Routes>
             {routes.map((route) => {
               const Page = route.page;
-              const isCheckAuth = !route.isPrivate || user.isAdmin
-              const Layout = route.isShowHeader ? DefaultComponent : Fragment
+              const isCheckAuth = !route.isPrivate || user.isAdmin;
+              const Layout = route.isShowHeader ? DefaultComponent : Fragment;
               if (!isCheckAuth) return null;
+
+              // Wrap admin routes with AdminPage layout
+              if (route.isAdminRoute) {
+                return (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    element={
+                      <AdminPage>
+                        <Page />
+                      </AdminPage>
+                    }
+                  />
+                );
+              }
+
               return (
                 <Route
                   key={route.path}

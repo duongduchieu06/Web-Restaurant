@@ -166,7 +166,7 @@ const Profile = () => {
           {notification.message}
         </Notification>
       )}
-        </>
+    </>
     )
 }
 

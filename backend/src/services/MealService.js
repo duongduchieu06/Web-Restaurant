@@ -6,19 +6,12 @@ const createMeal = (newMeal) => {
   return new Promise(async (resolve, reject) => {
     const { name, image, type, price, description } = newMeal;
     try {
-      if (!name || !price) {
-        resolve({
-          status: "THÔNG BÁO",
-          message: "Vui lòng cung cấp đầy đủ tên và giá món ăn"
-        });
-        return;
-      }
       const checkMeal = await Meal.findOne({
         name: name,
       });
       if (checkMeal !== null) {
         resolve({
-          status: "THÔNG BÁO",
+          status: "ERR",
           message: "Món ăn đã tồn tại, vui lòng đổi tên món ăn",
         });
       }
@@ -31,7 +24,7 @@ const createMeal = (newMeal) => {
       });
       if (createMeal) {
         resolve({
-          status: "OK",
+          status: "SUCCESS",
           message: "Tạo món thành công thành công",
           data: createMeal,
         });
@@ -51,15 +44,19 @@ const updateMeal = (id, data) => {
       console.log("check meal", checkMeal);
       if (checkMeal === null) {
         resolve({
-          status: "THÔNG BÁO",
+          status: "ERR",
           message: "Khum có món ăn này, hãy thêm món ăn nếu bạn cần!",
         });
+      } else if (!data.name || !data.price) {
+        resolve({
+          status: "ERR",
+          message: "Vui lòng cung cấp đầy đủ tên và giá món ăn"
+        });
+        return;
       }
-
       const updatedMeal = await Meal.findByIdAndUpdate(id, data, { new: true });
-
       resolve({
-        status: "OK",
+        status: "SUCCESS",
         message: "Cập nhật thành công",
         data: updatedMeal,
       });
@@ -77,7 +74,7 @@ const deleteMeal = (id) => {
       });
       if (checkMeal === null) {
         resolve({
-          status: "THÔNG BÁO",
+          status: "ERR",
           message: "Không có món ăn này!",
         });
       }
@@ -85,7 +82,7 @@ const deleteMeal = (id) => {
       await Meal.findByIdAndDelete(id);
 
       resolve({
-        status: "OK",
+        status: "SUCCESS",
         message: "Xóa thành công!",
       });
     } catch (e) {
@@ -102,12 +99,12 @@ const getMeal = (id) => {
       });
       if (meal === null) {
         resolve({
-          status: "THÔNG BÁO",
+          status: "ERR",
           message: "Không có món ăn này!",
         });
       }
       resolve({
-        status: "-----",
+        status: "SUCCESS",
         message: "Món ăn của nè:",
         data: meal,
       });
@@ -125,7 +122,7 @@ const getAll = ( limit, page, sort, filter ) => {
         const label = filter[0]
         const allmealFilter = await Meal.find({ [label]: { '$regex': filter[1]}}).limit(limit).skip( page * limit )
         resolve({
-          status: "-----",
+          status: "SUCCESS",
           message: "DANH SÁCH MÓN ĂN",
           data: allmealFilter,
           total: totalMeal,
@@ -138,7 +135,7 @@ const getAll = ( limit, page, sort, filter ) => {
         objectSort[sort[0]] = sort[1]
         const allmealSort = await Meal.find().limit(limit).skip( page * limit ).sort(objectSort)
         resolve({
-          status: "-----",
+          status: "SUCCESS",
           message: "DANH SÁCH MÓN ĂN",
           data: allmealSort,
           total: totalMeal,
@@ -148,7 +145,7 @@ const getAll = ( limit, page, sort, filter ) => {
       }
       const allmeal = await Meal.find().limit(limit).skip( page * limit)
       resolve({
-        status: "-----",
+        status: "SUCCESS",
         message: "DANH SÁCH MÓN ĂN",
         data: allmeal,
         total: totalMeal,

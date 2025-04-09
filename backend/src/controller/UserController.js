@@ -50,16 +50,21 @@ const loginUser = async (req, res) => {
       });
     }
     const response = await UserService.loginUser(req.body);
-    const {refresh_token, ...newRespone} = response
-    res.cookie('refresh_token', refresh_token, {
+if (response.status === "SUCCESS") {
+    const { refresh_token, ...newResponse } = response;
+    res.cookie("refresh_token", refresh_token, {
       httpOnly: true,
       secure: false,
-      sameSite: 'strict',
-    })
-    return res.status(200).json(newRespone);
+      sameSite: "strict",
+    });
+    return res.status(200).json(newResponse);
+    }
+    return res.status(400).json(response);
   } catch (e) {
-    return res.status(404).json({
-      message: e,
+    return res.status(500).json({
+status: "ERR",
+      message: "Lỗi server khi đăng nhập",
+      error: e.message,
     });
   }
 };
