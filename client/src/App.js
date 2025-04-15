@@ -15,12 +15,23 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user)
 
+  // useEffect(() => {
+  //   const {storageData, decoded} = handleDecoded()
+  //     if(decoded?.id){
+  //       handleGetDetailUser(decoded?.id, storageData)
+  //     } 
+  // }, [])
+
   useEffect(() => {
-    const {storageData, decoded} = handleDecoded()
-      if(decoded?.id){
-        handleGetDetailUser(decoded?.id, storageData)
-      } 
-  }, [])
+    try {
+      const { storageData, decoded } = handleDecoded();
+      if (decoded?.id) {
+        handleGetDetailUser(decoded.id, storageData);
+      }
+    } catch (error) {
+      console.error("Error in useEffect:", error);
+    }
+  }, []);
 
   const handleDecoded = () => {
     let storageData = localStorage.getItem('access_token')
