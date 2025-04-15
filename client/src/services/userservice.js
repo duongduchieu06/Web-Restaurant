@@ -42,3 +42,17 @@ export const updateUser = async(id, data, access_token) => {
     })
     return res.data
 }
+
+export const getAllUser = async() => {
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/user//GetAll`)
+    return res.data
+}
+
+export const deleteUser = async(id, access_token) => {
+    const res = await axiosJWT.delete(`${process.env.REACT_APP_API_URL}/user/DeleteUser/${id}`, {
+        headers: {
+            token: `Bearer ${access_token}`,
+        }
+    })
+    return res.data
+}

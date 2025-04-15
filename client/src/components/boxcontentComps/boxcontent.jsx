@@ -10,6 +10,12 @@ const BoxContent = (props) => {
     type,
     image,
   } = props
+
+  const formatPrice = (value) => {
+    if (!value) return "0đ"; // Xử lý trường hợp price là undefined hoặc null
+    return `${Number(value).toLocaleString("vi-VN")} vnđ`;
+  };
+
   return (  
     <>
       <Wrapped>
@@ -22,7 +28,7 @@ const BoxContent = (props) => {
             {description}
           </Description>
           <Price>
-            {price}
+            {formatPrice(price)}
           </Price>
         </Content>
       </Wrapped>

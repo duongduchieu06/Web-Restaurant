@@ -5,10 +5,12 @@ import BooKTable from "../pages/booktablePageComps/booktable"
 import SignInPage from "../pages/signinpageComps/signinpage"
 import SignUpPage from "../pages/signuppageComps copy/signuppage"
 import Profile from "../pages/profileComps/profile"
-import AdminPage from "../pages/AdminPageComps/adminpage"
-import AdminManageTable from "../pages/AdminManageTableComps/adminmanagetable"
 import AdminManageFood from "../pages/AdminManageFoodComps/adminmanagefood"
 import AdminManageUser from "../pages/AdminManageUserComps/adminmanageuser"
+import AdminManageRestaurant from "../pages/AdminManageResComps/adminmanagerestaurant"
+import AdminManageBooking from "../pages/AdminManageBookingComps/adminmanagebooking"
+import PaymentSuccess from "../pages/PaymentSuccess";
+import PaymentFailure from "../pages/PaymentFailure";
 
 export const routes = [
     {
@@ -47,6 +49,16 @@ export const routes = [
         isShowHeader: true
     },
     {
+        path: '/payment/success',
+        page: PaymentSuccess,
+        isShowHeader: false,
+        },
+        {
+        path: '/payment/failure',
+        page: PaymentFailure,
+        isShowHeader: false,
+    },
+    {
         path: '/Admin',
         page: () => <div>Welcome to Admin Dashboard</div>, // Placeholder for admin dashboard
         isShowHeader: false,
@@ -61,8 +73,8 @@ export const routes = [
         isAdminRoute: true,
     },
     {
-        path: '/Admin/ManageTables',
-        page: AdminManageTable,
+        path: '/Admin/ManageRestaurant',
+        page: AdminManageRestaurant,
         isShowHeader: false,
         isPrivate: true,
         isAdminRoute: true,
@@ -70,6 +82,13 @@ export const routes = [
     {
         path: '/Admin/ManageUsers',
         page: AdminManageUser,
+        isShowHeader: false,
+        isPrivate: true,
+        isAdminRoute: true,
+    },
+    {
+        path: '/Admin/ManageBooking',
+        page: AdminManageBooking,
         isShowHeader: false,
         isPrivate: true,
         isAdminRoute: true,

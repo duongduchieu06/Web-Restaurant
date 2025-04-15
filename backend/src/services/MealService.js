@@ -114,43 +114,60 @@ const getMeal = (id) => {
   });
 };
 
-const getAll = ( limit, page, sort, filter ) => {
+// const getAll = ( limit, page, sort, filter ) => {
+//   return new Promise(async (resolve, reject) => {
+//     try {
+//       const totalMeal = await Meal.countDocuments()
+//       if(filter){
+//         const label = filter[0]
+//         const allmealFilter = await Meal.find({ [label]: { '$regex': filter[1]}}).limit(limit).skip( page * limit )
+//         resolve({
+//           status: "SUCCESS",
+//           message: "DANH SÁCH MÓN ĂN",
+//           data: allmealFilter,
+//           total: totalMeal,
+//           pageCurrent: page + 1,
+//           pageTotal: Math.ceil(totalMeal / limit),
+//         }); 
+//       }
+//       if(sort) {
+//         const objectSort = {}
+//         objectSort[sort[0]] = sort[1]
+//         const allmealSort = await Meal.find().limit(limit).skip( page * limit ).sort(objectSort)
+//         resolve({
+//           status: "SUCCESS",
+//           message: "DANH SÁCH MÓN ĂN",
+//           data: allmealSort,
+//           total: totalMeal,
+//           pageCurrent: page + 1,
+//           pageTotal: Math.ceil(totalMeal / limit),
+//         }); 
+//       }
+//       const allmeal = await Meal.find().limit(limit).skip( page * limit)
+//       resolve({
+//         status: "SUCCESS",
+//         message: "DANH SÁCH MÓN ĂN",
+//         data: allmeal,
+//         total: totalMeal,
+//         pageCurrent: page + 1,
+//         pageTotal: Math.ceil(totalMeal / limit),
+//       });
+//     } catch (e) {
+//       reject(e);
+//     }
+//   });
+// };
+
+const getAll = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const totalMeal = await Meal.countDocuments()
-      if(filter){
-        const label = filter[0]
-        const allmealFilter = await Meal.find({ [label]: { '$regex': filter[1]}}).limit(limit).skip( page * limit )
-        resolve({
-          status: "SUCCESS",
-          message: "DANH SÁCH MÓN ĂN",
-          data: allmealFilter,
-          total: totalMeal,
-          pageCurrent: page + 1,
-          pageTotal: Math.ceil(totalMeal / limit),
-        }); 
-      }
-      if(sort) {
-        const objectSort = {}
-        objectSort[sort[0]] = sort[1]
-        const allmealSort = await Meal.find().limit(limit).skip( page * limit ).sort(objectSort)
-        resolve({
-          status: "SUCCESS",
-          message: "DANH SÁCH MÓN ĂN",
-          data: allmealSort,
-          total: totalMeal,
-          pageCurrent: page + 1,
-          pageTotal: Math.ceil(totalMeal / limit),
-        }); 
-      }
-      const allmeal = await Meal.find().limit(limit).skip( page * limit)
+      const totalMeal = await Meal.countDocuments();
+      const allmeal = await Meal.find();
       resolve({
         status: "SUCCESS",
         message: "DANH SÁCH MÓN ĂN",
         data: allmeal,
         total: totalMeal,
-        pageCurrent: page + 1,
-        pageTotal: Math.ceil(totalMeal / limit),
       });
     } catch (e) {
       reject(e);

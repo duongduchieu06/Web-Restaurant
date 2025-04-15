@@ -11,17 +11,13 @@ import * as MealService from '../../services/mealservice';
 
 const MenuPage = () => {
   const sliderImages = [slider1, slider2, slider3];
-  
-  // Define a color mapping for meal types
+
   const typeColors = {
-    burger: '#A11D25', // Light red for Burger
-    salad: '#18441A',  // Light green for Salad
-    starter: '#d1ecf1', // Light blue for Starter
-    appetizer: '#f8d7da',
-    main: '#d4edda',
-    dessert: '#d1ecf1',
-    drink: '#fff3cd',
-    // Add more types and colors as needed
+    burger: '#A11D25',
+    salad: '#18441A',
+    starter: '#121212',
+    fries: '#D2691E',
+    drink: '#23395d',
   };
 
   const fetchMealAll = async () => {
@@ -36,9 +32,7 @@ const MenuPage = () => {
     retry: 3,
     retryDelay: 1000
   })
-  console.log("meal", meal)
 
-  // Lấy danh sách các type duy nhất từ meal
   const mealTypes = [...new Set(meal?.data?.map(item => item.type))];
 
   return (

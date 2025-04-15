@@ -1,17 +1,24 @@
-export const isJsonString = (data) => {
-    try {
-        JSON.parse(data)
-    } catch (error) {
-        return false
-    }
-    return true
-}
+import axios from "axios";
 
-// export const getBase64 = (file) => {
-//     return new Promise((resolve, reject) => {
-//         const reader = new FileReader()
-//         reader.readAsDataURL(file)
-//         reader.onload = () => resolve(reader.result)
-//         reader.onerror = error => reject(error)
-//     })
-// }
+const instance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:3001/api/",
+});
+
+export const post = async (url, data, config = {}) => {
+  try {
+    const response = await instance.post(url, data, config);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};
+
+// Export isJsonString
+export const isJsonString = (data) => {
+  try {
+    JSON.parse(data);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

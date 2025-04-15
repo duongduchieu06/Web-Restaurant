@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;
-    height: 100%;
+    height: 1000px;
     background-color:rgb(224, 224, 224);
 `
 
@@ -43,7 +43,7 @@ export const ButtonNavi = styled.div`
 export const WrappedMange = styled.div`
     width: 100%;
     background-color: #f5f5f5;
-    height: 10000px;
+    height: auto;
     margin: 10px 10px 10px 265px;
     border-radius: 10px;
     padding: 10px;

@@ -19,6 +19,31 @@ export const Wrapped = styled.div`
   // align-items: center;
 `;
 
+export const WrappedBooking = styled.div`
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+
+    strong {
+      color: #000;
+      margin-right: 5px;
+    }
+  }
+`;
+
 export const Content = styled.div`
   display: flex;
   // flex-direction: column;
@@ -29,7 +54,7 @@ export const Content = styled.div`
 export const Infor = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   gap: 20px;
   position: relative;
   padding: 0 40px;
@@ -99,6 +124,12 @@ export const InforDetail = styled.span`
   font-weight: 600;
 `;
 
+export const WrappedButton = styled.div`
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+`
+
 export const ButtonStyled = styled(Button)`
   width: 120px;
   padding: 8px 80px;
@@ -117,6 +148,64 @@ export const ButtonStyled = styled(Button)`
     border: 2px solid #000 !important;
   }
 `;
+
+export const ButtonStyledGreen = styled(Button)`
+  width: 120px;
+  padding: 8px 80px;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: 2px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  &:hover {
+    background-color: #fff !important;
+    color: #28a745 !important;
+    border: 2px solid #28a745 !important;
+  }
+`;
+
+export const ButtonStyledYellow = styled(Button)`
+  width: 120px;
+  padding: 8px 80px;
+  background-color: #f6ac00;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: 2px solid #f6ac00;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  &:hover {
+    background-color: #fff !important;
+    color: #f6ac00 !important;
+    border: 2px solid #f6ac00 !important;
+  }
+`;
+
+export const ButtonStyledRed = styled(Button)`
+  width: 120px;
+  padding: 8px 80px;
+  background-color: #ff0000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: 2px solid #ff0000;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  &:hover {
+    background-color: #fff !important;
+    color: #ff0000 !important;
+    border: 2px solid #ff0000 !important;
+  }
+`;
+
 
 export const ButtonSave = styled(LoadingButton)`
   width: 120px;
@@ -164,6 +253,45 @@ export const BackgroundPopup = styled(Button)`
   z-index: 1000;
 `;
 
+export const ListBooking = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`
+
+export const Action = styled.div`
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+  &.active {
+    opacity: 1;
+  }
+`;
+
+export const BoxItemTimes = styled.div`
+  width: 80%;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+`;
+
+export const ItemTime = styled.div`
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: ${(props) => (props.selected ? "#f6ac00" : "#fff")};
+  color: ${(props) => (props.selected ? "#fff" : "#000")};
+  &:hover {
+    background-color: ${(props) => (props.selected ? "#f6ac00" : "#f0f0f0")};
+    color: ${(props) => (props.selected ? "#fff" : "#f6ac00")};
+  }
+`;
+
 export const Notification = styled.div`
   position: fixed;
   top: 20px;
@@ -186,4 +314,40 @@ export const Notification = styled.div`
       opacity: 1;
     }
   }
+`;
+
+
+export const StatusBadge = styled.div`
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 2px solid;
+  border-color: ${(props) =>
+    props.status === "chờ xử lý"
+      ? "#f6ac00"
+      : props.status === "đã hủy"
+      ? "#f44336"
+      : props.status === "đã xác nhận"
+      ? "#18441A"
+      : "#ccc"};
+  color: ${(props) =>
+    props.status === "chờ xử lý"
+      ? "#f6ac00"
+      : props.status === "đã hủy"
+      ? "#f44336"
+      : props.status === "đã xác nhận"
+      ? "#18441A"
+      : "#ccc"};
+`;
+
+export const ButtonAction = styled.div`
+  color: #000;
+  cursor: pointer;
+  font-size: 28px;
+  transition: color 0.3s ease, transform 0.3s ease;
+  &:hover {
+    color: #f6ac00;
+  };
 `;

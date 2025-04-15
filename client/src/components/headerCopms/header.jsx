@@ -34,7 +34,7 @@ const Header = () => {
     await UserService.logoutUser()
       localStorage.removeItem('access_token') // Xóa token khi đăng xuất
       dispatch(resetUser())
-      // navigate('/')
+      navigate('/')
   }
 
   const handelNavigateLogin = () => {

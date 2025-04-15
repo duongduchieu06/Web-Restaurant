@@ -59,6 +59,7 @@ export const InputFileStyled = styled.div`
   width: 80%;
   display: flex;
   align-items: center;
+  gap: 20px;
 `;
 export const Alert = styled.div`
   width: 80%;

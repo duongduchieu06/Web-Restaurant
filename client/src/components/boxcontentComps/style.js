@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import anh from "../../assest/image/hihi.jpg";
-
 
 
 export const Name = styled.div`
@@ -28,7 +26,7 @@ export const Image = styled.div`
   width: 250px;
   height: 200px;
   border-radius: 10px;
-  background-image: url(${anh});
+  
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

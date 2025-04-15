@@ -30,8 +30,9 @@ const AdminPage = ({ children }) => {
         </Head>
         <ButtonNavi onClick={() => navigate("/")}>Trang Chủ</ButtonNavi>
         <ButtonNavi onClick={() => navigate("/Admin/ManageFood")}>Quản Lý Món Ăn</ButtonNavi>
-        <ButtonNavi onClick={() => navigate("/Admin/ManageTables")}>Quản Lý Bàn</ButtonNavi>
+        <ButtonNavi onClick={() => navigate("/Admin/ManageRestaurant")}>Quản Lý Nhà Hàng</ButtonNavi>
         <ButtonNavi onClick={() => navigate("/Admin/ManageUsers")}>Quản Lý Người Dùng</ButtonNavi>
+        <ButtonNavi onClick={() => navigate("/Admin/ManageBooking")}>Quản Lý Đặt Bàn</ButtonNavi>
       </WrappedNavi>
       <WrappedMange>
         {children}
