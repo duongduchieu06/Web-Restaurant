@@ -30,12 +30,12 @@ mongoose
     console.error("MongoDB connection error:", err);
   });
 
-  if (process.env.NODE_ENV !== "production") {
-    const port = process.env.PORT || 3001;
-    app.listen(port, () => {
-      console.log("Server is running on port:", port);
-    });
-  }
+  // if (process.env.NODE_ENV !== "production") {
+  //   const port = process.env.PORT || 3001;
+  //   app.listen(port, () => {
+  //     console.log("Server is running on port:", port);
+  //   });
+  // }
 
 // mongoose
 //   .connect(`${process.env.MONGO_DB}`)
