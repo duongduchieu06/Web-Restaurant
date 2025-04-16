@@ -54,7 +54,7 @@ if (response.status === "SUCCESS") {
     const { refresh_token, ...newResponse } = response;
     res.cookie("refresh_token", refresh_token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "strict",
     });
     return res.status(200).json(newResponse);
