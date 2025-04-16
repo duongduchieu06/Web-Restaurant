@@ -1,7 +1,9 @@
 import axios from "axios";
 // import { data } from "react-router-dom";
 
-export const axiosJWT = axios.create()
+export const axiosJWT = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || "https://chopsvn.vercel.app/api",
+});
 
 export const loginUser = async(data) => {
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/SignIn`, data )
