@@ -5,7 +5,7 @@
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "client/build"
       }
     },
     {
@@ -13,14 +13,14 @@
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
       "source": "/api/(.*)",
       "destination": "/backend/src/index.js"
     },
     {
       "source": "/(.*)",
-      "destination": "/build/index.html"
+      "destination": "/client/build/index.html"
     }
   ]
 }
