@@ -15,12 +15,12 @@
   ],
   "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/backend/src/index.js"
+      "src": "/api/(.*)",
+      "dest": "/backend/src/index.js"
     },
     {
-      "source": "/(.*)",
-      "destination": "/client/build/index.html"
+      "src": "/(.*)",
+      "dest": "/client/build/index.html"
     }
   ]
 }
