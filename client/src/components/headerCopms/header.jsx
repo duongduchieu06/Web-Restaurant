@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { HeaderWrapped, HeaderContent, HeaderLogo, ButtonLanguage, BoxButton, Button, WrapperContentPopup, ContentPopup } from "./style";
 import imagelogo from "../../assest/image/logo.png"
 import VE from "../../assest/image/VE.jpg"
@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faUserPlus,
   faRightToBracket,
-  faCircleUser,
   faUser
  } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from "react-redux";

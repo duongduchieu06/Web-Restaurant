@@ -1,5 +1,5 @@
 import React from "react";
-import {Wrapped, Image, Content, BoxName, Name, Description, Price, Type} from "./style"
+import {Wrapped, Image, Content, Name, Description, Price} from "./style"
 
 const BoxContent = (props) => {
 

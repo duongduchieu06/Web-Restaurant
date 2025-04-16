@@ -29,9 +29,9 @@ function App() {
         handleGetDetailUser(decoded.id, storageData);
       }
     } catch (error) {
-      console.error("Error in useEffect:", error);
+      console.error("Error:", error);
     }
-  }, []);
+  }, [handleGetDetailUser]);
 
   const handleDecoded = () => {
     let storageData = localStorage.getItem('access_token')
