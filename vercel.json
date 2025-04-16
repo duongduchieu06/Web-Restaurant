@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "outputDirectory": "client/build",
   "builds": [
     {
       "src": "client/package.json",
