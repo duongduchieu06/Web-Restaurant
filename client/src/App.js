@@ -23,15 +23,18 @@ function App() {
   // }, [])
 
   useEffect(() => {
-    try {
-      const { storageData, decoded } = handleDecoded();
-      if (decoded?.id) {
-        handleGetDetailUser(decoded.id, storageData);
+    const fetchUser = async () => {
+      try {
+        const { storageData, decoded } = handleDecoded();
+        if (decoded?.id) {
+          await handleGetDetailUser(decoded.id, storageData);
+        }
+      } catch (error) {
+        console.error("Error in useEffect:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }, [handleGetDetailUser]);
+    };
+    fetchUser();
+  }, []);
 
   const handleDecoded = () => {
     let storageData = localStorage.getItem('access_token')
@@ -65,14 +68,29 @@ function App() {
   });
   
 
+  // const handleGetDetailUser = async (id, token) => {
+  //   try {
+  //     const res = await UserService.getDetailUser(id, token)
+  //     dispatch(updateUser( {...res?.data, access_token: token}))
+  //   } catch (error) {
+  //     console.error("Failed to get user details:", error)
+  //   }
+  // }
+
   const handleGetDetailUser = async (id, token) => {
     try {
-      const res = await UserService.getDetailUser(id, token)
-      dispatch(updateUser( {...res?.data, access_token: token}))
+      const res = await UserService.getDetailUser(id, token);
+      if (res?.status === "SUCCESS") {
+        dispatch(updateUser({ ...res.data, access_token: token }));
+      } else {
+        console.error("Failed to get user details:", res?.message);
+        localStorage.removeItem('access_token'); // Xóa token nếu API thất bại
+      }
     } catch (error) {
-      console.error("Failed to get user details:", error)
+      console.error("Failed to get user details:", error);
+      localStorage.removeItem('access_token');
     }
-  }
+  };
 
   return (
     <>
