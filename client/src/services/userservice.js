@@ -58,3 +58,5 @@ export const deleteUser = async(id, access_token) => {
     })
     return res.data
 }
+
+console.log("hieu da o dayaaaa")

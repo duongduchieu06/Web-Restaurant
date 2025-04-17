@@ -36,7 +36,7 @@ mongoose
       console.log("Server is running on port:", port);
     });
   }
-
+  console.log("hieu da o day")
 // mongoose
 //   .connect(`${process.env.MONGO_DB}`)
 //   .then(() => {
