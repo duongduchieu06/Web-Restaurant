@@ -1,6 +1,6 @@
 const Meal = require("../models/Meal");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const createMeal = (newMeal) => {
   return new Promise(async (resolve, reject) => {
