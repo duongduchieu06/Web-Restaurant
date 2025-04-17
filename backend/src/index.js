@@ -31,25 +31,7 @@
 //     throw err;
 //   });
 
-//   // if (process.env.NODE_ENV !== "production") {
-//   //   const port = process.env.PORT || 3001;
-//   //   app.listen(port, () => {
-//   //     console.log("Server is running on port:", port);
-//   //   });
-//   // }
 //   console.log("hieu da o day")
-// // mongoose
-// //   .connect(`${process.env.MONGO_DB}`)
-// //   .then(() => {
-// //     console.log("connect DB is success!");
-// //   })
-// //   .catch((err) => {
-// //     console.log(err);
-// //   });
-
-// // app.listen(port, () => {
-// //   console.log("server is ng in port: ", port);
-// // });
 
 // module.exports = app;
 
@@ -93,6 +75,7 @@ app.use((err, req, res, next) => {
   console.error("Server error:", err.message);
   res.status(500).json({ error: "Internal Server Error", message: err.message });
 });
+
 
 routes(app);
 
