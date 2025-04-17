@@ -78,13 +78,21 @@ const connectDB = async () => {
     });
     console.log("Connected to MongoDB!");
   } catch (err) {
-    console.error("MongoDB connection error:", err);
-    throw err; // Ném lỗi để xử lý ở cấp cao hơn
+    console.error("MongoDB connection error:", err.message);
+    throw err;
   }
 };
 
-// Kết nối khi khởi động app
-connectDB().catch(err => console.error("Failed to connect to MongoDB:", err));
+// Kết nối MongoDB khi khởi động
+connectDB().catch(err => {
+  console.error("Failed to connect to MongoDB:", err.message);
+});
+
+// Thêm middleware để bắt lỗi
+app.use((err, req, res, next) => {
+  console.error("Server error:", err.message);
+  res.status(500).json({ error: "Internal Server Error", message: err.message });
+});
 
 routes(app);
 
