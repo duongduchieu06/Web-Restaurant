@@ -22,19 +22,19 @@ function App() {
   //     } 
   // }, [])
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const { storageData, decoded } = handleDecoded();
-        if (decoded?.id) {
-          await handleGetDetailUser(decoded.id, storageData);
-        }
-      } catch (error) {
-        console.error("Error in useEffect:", error);
-      }
-    };
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const { storageData, decoded } = handleDecoded();
+  //       if (decoded?.id) {
+  //         await handleGetDetailUser(decoded.id, storageData);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error in useEffect:", error);
+  //     }
+  //   };
+  //   fetchUser();
+  // }, []);
 
   const handleDecoded = () => {
     let storageData = localStorage.getItem('access_token')

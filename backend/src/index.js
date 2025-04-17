@@ -28,14 +28,15 @@ mongoose
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err);
+    throw err;
   });
 
-  if (process.env.NODE_ENV !== "production") {
-    const port = process.env.PORT || 3001;
-    app.listen(port, () => {
-      console.log("Server is running on port:", port);
-    });
-  }
+  // if (process.env.NODE_ENV !== "production") {
+  //   const port = process.env.PORT || 3001;
+  //   app.listen(port, () => {
+  //     console.log("Server is running on port:", port);
+  //   });
+  // }
   console.log("hieu da o day")
 // mongoose
 //   .connect(`${process.env.MONGO_DB}`)
