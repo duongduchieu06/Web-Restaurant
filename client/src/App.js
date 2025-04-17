@@ -1,9 +1,7 @@
-import axios from 'axios'
 import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes } from './routes';
 import DefaultComponent from './components/defaultComps/DefaultComponent';
-import { useQuery } from '@tanstack/react-query';
 import { isJsonString } from './utils';
 import { jwtDecode } from 'jwt-decode';
 import * as UserService from './services/userservice'

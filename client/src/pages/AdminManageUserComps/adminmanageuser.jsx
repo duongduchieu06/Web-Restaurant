@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, BoxButtonEdit, BoxInput, BoxWrapper, ButtonSave, ButtonStyled, HeaderTitle, ImageAvatar, InputFileStyled, InputStyled, Label, Notification, Popup, SelecteStyled, WrappedButton, WrapperEdit } from "./style";
+import { Alert, BoxButtonEdit, BoxInput, BoxWrapper, ButtonSave, ButtonStyled, HeaderTitle, ImageAvatar, InputStyled, Label, Notification, SelecteStyled, WrappedButton, WrapperEdit } from "./style";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircleUser,
