@@ -11,6 +11,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const queryClient = new QueryClient();
+console.log("hihihihiih")
 root.render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>

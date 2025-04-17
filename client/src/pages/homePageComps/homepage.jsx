@@ -12,7 +12,7 @@ import special2 from '../../assest/image/specialMilkShake.jpg'
 
 const HomePage = () => {
   const sliderImages = [slider1, slider2, slider3];
-
+  console.log("hihihihiih")
   return (
     <>
       <Wrapped>
