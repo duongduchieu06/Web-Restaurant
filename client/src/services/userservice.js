@@ -6,13 +6,16 @@ export const axiosJWT = axios.create({
 });
 
 export const loginUser = async(data) => {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/SignIn`, data )
+    console.log("hieu da o dayaaaa")
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/SignIn`, data )
     return res.data
 }
 
 export const signUpUser = async(data) => {
+    console.log("hieu da o dayaaaa")
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/SignUp`, data )
     return res.data
+    
 }
 
 export const getDetailUser = async(id, access_token) => {
@@ -59,4 +62,3 @@ export const deleteUser = async(id, access_token) => {
     return res.data
 }
 
-console.log("hieu da o dayaaaa")
