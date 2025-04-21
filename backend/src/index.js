@@ -47,3 +47,7 @@ app.use((req, res) => {
 // }
 
 module.exports = app;
+
+console.log("MONGO_DB:", process.env.MONGO_DB);
+console.log("ACCESS_TOKEN:", process.env.ACCESS_TOKEN);
+console.log("REFRESH_TOKEN:", process.env.REFRESH_TOKEN);

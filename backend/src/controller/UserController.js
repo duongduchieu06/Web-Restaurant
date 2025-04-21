@@ -133,6 +133,8 @@ const getAll = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
+    console.log("getUser - User ID:", req.params.id);
+    console.log("getUser - Request User:", req.user);
     const userId = req.params.id;
     if (!userId) {
       return res.status(200).json({
@@ -143,6 +145,7 @@ const getUser = async (req, res) => {
     const response = await UserService.getUser(userId);
     return res.status(200).json(response);
   } catch (e) {
+    console.error("getUser - Error:", e.message);
     return res.status(404).json({
       message: e,
     });

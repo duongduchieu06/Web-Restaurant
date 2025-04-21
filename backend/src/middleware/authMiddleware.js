@@ -60,6 +60,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const authMiddleWare = (req, res, next) => {
+
   const token = req.headers.token?.split(" ")[1]; // Dùng optional chaining để tránh lỗi
 
   if (!token) {
@@ -90,8 +91,9 @@ const authMiddleWare = (req, res, next) => {
 };
 
 const authUserMiddleware = (req, res, next) => {
+  console.log("authUserMiddleware - Headers:", req.headers);
   const token = req.headers.token?.split(" ")[1];
-
+  console.log("authUserMiddleware - Token:", token);
   if (!token) {
     return res.status(401).json({
       status: "ERR",
@@ -101,12 +103,13 @@ const authUserMiddleware = (req, res, next) => {
 
   jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
     if (err) {
+      console.error("authUserMiddleware - JWT Verify Error:", err.message);
       return res.status(403).json({
         status: "ERR",
         message: "Token không hợp lệ hoặc đã hết hạn!",
       });
     }
-
+    console.log("authUserMiddleware - Decoded User:", user);
     req.user = { id: user.id, isAdmin: user.isAdmin || false };
     next();
   });
