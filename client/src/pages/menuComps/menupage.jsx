@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import * as MealService from '../../services/mealservice';
 
 const MenuPage = () => {
+  console.log("MenuPage rendered");
   const sliderImages = [slider1, slider2, slider3];
 
   const typeColors = {
