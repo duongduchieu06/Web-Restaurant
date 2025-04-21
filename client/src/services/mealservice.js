@@ -3,6 +3,7 @@ import { axiosJWT } from './userservice';
 
 export const getAllMeal = async () => {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/meal/GetAll`);
+    console.log("getAllMeal response:", res.data);
     return res.data;
 };
 

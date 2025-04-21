@@ -104,9 +104,11 @@ function App() {
   };
 
   if (loading) return <div>Đang tải...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{error}</div>; 
 
   console.log("hiiiii")
+  console.log("hiiiii");
+  console.log("Routes being processed:", routes);
   return (
     <>
       <div>
@@ -116,7 +118,10 @@ function App() {
               const Page = route.page;
               const isCheckAuth = !route.isPrivate || user.isAdmin;
               const Layout = route.isShowHeader ? DefaultComponent : Fragment;
-              if (!isCheckAuth) return null;
+              if (!isCheckAuth) {
+                console.log(`Route ${route.path} skipped due to auth`);
+                return null;
+              };
 
               // Wrap admin routes with AdminPage layout
               if (route.isAdminRoute) {
