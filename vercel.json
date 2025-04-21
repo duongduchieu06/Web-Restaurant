@@ -19,6 +19,10 @@
       "dest": "/backend/src/index.js"
     },
     {
+      "src": "/static/(.*)",
+      "dest": "/client/build/static/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/client/build/index.html",
       "status": 200
