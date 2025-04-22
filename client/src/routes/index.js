@@ -1,6 +1,6 @@
 import HomePage from "../pages/homePageComps/homepage"
 import MenuPage from "../pages/menuComps/menupage"
-import IntroducePage from "../pages/introducePageComps/introducepage"
+import IntroducePage from "../pages/introducePageComps/introducepage.jsx"
 import BooKTable from "../pages/booktablePageComps/booktable"
 import SignInPage from "../pages/signinpageComps/signinpage"
 import SignUpPage from "../pages/signuppageComps copy/signuppage"
