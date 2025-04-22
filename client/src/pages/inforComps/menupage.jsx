@@ -5,8 +5,6 @@ const InforPage = () => {
   return (
     <>
       <Container>
-        <SliderComponent sliderImages={sliderImages}/>
-        <Line />
         <WrappedMenu>
           GIỚI THIỆU
           <Title>LƯỜI QUÁ CHƯA CẢ LÀM </Title>
