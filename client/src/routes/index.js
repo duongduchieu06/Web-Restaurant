@@ -1,6 +1,5 @@
 import HomePage from "../pages/homePageComps/homepage"
 import MenuPage from "../pages/menuComps/menupage"
-import IntroducePage from "../pages/introducePageComps/introducepage.jsx"
 import BooKTable from "../pages/booktablePageComps/booktable"
 import SignInPage from "../pages/signinpageComps/signinpage"
 import SignUpPage from "../pages/signuppageComps copy/signuppage"
@@ -11,6 +10,7 @@ import AdminManageRestaurant from "../pages/AdminManageResComps/adminmanageresta
 import AdminManageBooking from "../pages/AdminManageBookingComps/adminmanagebooking"
 import PaymentSuccess from "../pages/PaymentSuccess";
 import PaymentFailure from "../pages/PaymentFailure";
+import InforPage from "../pages/inforComps/menupage"
 
 export const routes = [
     {
@@ -25,7 +25,7 @@ export const routes = [
     },
     {
         path: '/Introduce',
-        page: IntroducePage,
+        page: InforPage,
         isShowHeader: true
     },
     {
