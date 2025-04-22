@@ -39,12 +39,12 @@ app.use((req, res) => {
 });
 
 // Xóa đoạn app.listen vì không cần trong môi trường serverless của Vercel
-// if (process.env.NODE_ENV !== "production") {
-//   const port = process.env.PORT || 3001;
-//   app.listen(port, () => {
-//     console.log("Server is running on port:", port);
-//   });
-// }
+if (process.env.NODE_ENV !== "production") {
+  const port = process.env.PORT || 3001;
+  app.listen(port, () => {
+    console.log("Server is running on port:", port);
+  });
+}
 
 module.exports = app;
 

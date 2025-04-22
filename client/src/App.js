@@ -103,8 +103,8 @@ function App() {
     }
   };
 
-  if (loading) return <div>Đang tải...</div>;
-  if (error) return <div>{error}</div>; 
+  // if (loading) return <div>Đang tải...</div>;
+  // if (error) return <div>{error}</div>; 
 
   console.log("hiiiii")
   console.log("hiiiii");
