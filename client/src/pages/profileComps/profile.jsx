@@ -236,6 +236,7 @@ const Profile = () => {
                setNotification(null);
                setIsOpenDelete(false);
                setIsLoadingCustom(false);
+               setActiveActionId(null);
             },3000);
           } else {
             setNotification({ type: "error", message: res.message || "Hủy đặt bàn thất bại!" });
@@ -399,136 +400,135 @@ const Profile = () => {
             </Infor>
             <WrappedBooking>
               <h2>DANH SÁCH ĐẶT BÀN</h2>
-              <span style={{ color: 'red', marginBottom: '20px' }}>
+                <span style={{ color: 'red', marginBottom: '20px' }}>
                 <span style={{ fontWeight: 600 }}>LƯU Ý: </span>
-                Nhà hàng sẽ xem xét yêu cầu đặt bàn và sẽ xác nhận trước đặt bàn 1 tiếng ( xác nhận sẽ không thể chỉnh sửa )
-              </span>
+                  Nhà hàng sẽ xem xét yêu cầu đặt bàn và sẽ xác nhận trước đặt bàn 1 tiếng ( xác nhận sẽ không thể chỉnh sửa )
+                </span>
                 {myBookings?.data?.length ? (
                   myBookings.data.map((booking) => (
-                    <div
-                      key={booking._id}
-                      style={{
-                        border: `2px solid ${getBorderColor(booking.status)}`,
-                        borderRadius: '5px',
-                        padding: '10px',
-                        marginBottom: '10px',
-                        backgroundColor: '#fff',
-                        // display: 'flex',
-                        // justifyContent: 'space-between',
-                        // alignItems: 'center',
-                      }}
-                    >
-                      <div style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        width: "100%",
-                      }}>
-                        <ListBooking>
-                          <p>
-                            <strong>Tên nhà hàng:</strong> {booking.restaurantName || 'Không có tên nhà hàng'}
-                          </p>
-                          <p>
-                            <strong>Số giờ:</strong> {booking.time || 'Không xác định'}
-                          </p>
-                          <p>
-                            <strong>Số người:</strong> {booking.numberOfPeople || 'Không xác định'}
-                          </p>
-                          <p>
-                            <strong>Số tầng:</strong> {booking.floor || 'Không xác định'}
-                          </p>
-                          <p>
-                            <strong>Ngày đặt:</strong> {booking.date || 'Không xác định'}
-                          </p>
-                        </ListBooking>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px' }}>
-                          <StatusBadge status={booking.status}>
-                            {booking.status || 'Không xác định'}
-                          </StatusBadge>
-                          {booking.status !== 'đã hủy' && booking.status !== 'đã xác nhận' ? (
-                            <>
-                              
-                                <ButtonAction onClick={() => handleToggleAction(booking._id)}>
-                                  <FontAwesomeIcon
-                                    icon={faChevronDown}
-                                    style={{
-                                      transition: "transform 0.5s ease",
-                                      transform: activeActionId === booking._id ? "rotate(180deg)" : "rotate(0deg)",
-                                    }}
-                                  />
-                                </ButtonAction>
-                            </>
-                          ) : null}
+                    <>
+                      <div
+                        key={booking._id}
+                        style={{
+                          border: `2px solid ${getBorderColor(booking.status)}`,
+                          borderRadius: '5px',
+                          padding: '10px',
+                          marginBottom: '10px',
+                          backgroundColor: '#fff',
+                        }}
+                      >
+                        <div style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          width: "100%",
+                        }}>
+                          <ListBooking>
+                            <p>
+                              <strong>Tên nhà hàng:</strong> {booking.restaurantName || 'Không có tên nhà hàng'}
+                            </p>
+                            <p>
+                              <strong>Số giờ:</strong> {booking.time || 'Không xác định'}
+                            </p>
+                            <p>
+                              <strong>Số người:</strong> {booking.numberOfPeople || 'Không xác định'}
+                            </p>
+                            <p>
+                              <strong>Số tầng:</strong> {booking.floor || 'Không xác định'}
+                            </p>
+                            <p>
+                              <strong>Ngày đặt:</strong> {booking.date || 'Không xác định'}
+                            </p>
+                          </ListBooking>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px' }}>
+                            <StatusBadge status={booking.status}>
+                              {booking.status || 'Không xác định'}
+                            </StatusBadge>
+                            {booking.status !== 'đã hủy' && booking.status !== 'đã xác nhận' ? (
+                              <>
+                                
+                                  <ButtonAction onClick={() => handleToggleAction(booking._id)}>
+                                    <FontAwesomeIcon
+                                      icon={faChevronDown}
+                                      style={{
+                                        transition: "transform 0.5s ease",
+                                        transform: activeActionId === booking._id ? "rotate(180deg)" : "rotate(0deg)",
+                                      }}
+                                    />
+                                  </ButtonAction>
+                              </>
+                            ) : null}
+                          </div>
                         </div>
-                      </div>
-                      
-                        {activeActionId === booking._id && (
-                          <Action 
-                            style={{
-                              transition: "all 10s ease-in-out", // Cập nhật transition
-                              maxHeight: activeActionId === booking._id ? "200px" : "0", // Mở rộng chiều cao
-                              opacity: activeActionId === booking._id ? 1 : 0, // Hiệu ứng mờ dần
-                              transform: activeActionId === booking._id ? "translateY(0)" : "translateY(-10px)", // Hiệu ứng trượt
-                              overflow: "hidden", // Ẩn nội dung khi thu gọn
-                            }}
-                          >
-                            <ButtonStyledGreen
+                        
+                          {activeActionId === booking._id && (
+                            <Action 
                               style={{
-                                backgroundColor:
-                                  booking.meals?.length > 0 && booking.paymentStatus === 'chờ xử lý'
-                                    ? '#28a745'
-                                    : '#ccc',
-                                borderColor:
-                                  booking.meals?.length > 0 && booking.paymentStatus === 'chờ xử lý'
-                                    ? '#28a745'
-                                    : '#ccc',
-                                cursor:
-                                  booking.meals?.length > 0 && booking.paymentStatus === 'chờ xử lý'
-                                    ? 'pointer'
-                                    : 'not-allowed',
+                                transition: "all 10s ease-in-out", // Cập nhật transition
+                                maxHeight: activeActionId === booking._id ? "200px" : "0", // Mở rộng chiều cao
+                                opacity: activeActionId === booking._id ? 1 : 0, // Hiệu ứng mờ dần
+                                transform: activeActionId === booking._id ? "translateY(0)" : "translateY(-10px)", // Hiệu ứng trượt
+                                overflow: "hidden", // Ẩn nội dung khi thu gọn
                               }}
-                              onClick={() =>
-                                booking.meals?.length > 0 &&
-                                booking.paymentStatus === 'chờ xử lý' &&
-                                handlePayment(booking._id)
-                              }
-                              disabled={!booking.meals?.length || booking.paymentStatus !== 'chờ xử lý'}
                             >
-                              THANH TOÁN
-                            </ButtonStyledGreen>
-                            <ButtonStyled onClick={() => handleOpenEditBooking(booking)}>
-                              CẬP NHẬT
-                            </ButtonStyled>
-                            <ButtonStyledYellow
-                              onClick={() => handleOpenOrderMeal(booking)}
+                              <ButtonStyledGreen
+                                style={{
+                                  backgroundColor:
+                                    booking.meals?.length > 0 && booking.paymentStatus === 'chờ xử lý'
+                                      ? '#28a745'
+                                      : '#ccc',
+                                  borderColor:
+                                    booking.meals?.length > 0 && booking.paymentStatus === 'chờ xử lý'
+                                      ? '#28a745'
+                                      : '#ccc',
+                                  cursor:
+                                    booking.meals?.length > 0 && booking.paymentStatus === 'chờ xử lý'
+                                      ? 'pointer'
+                                      : 'not-allowed',
+                                }}
+                                onClick={() =>
+                                  booking.meals?.length > 0 &&
+                                  booking.paymentStatus === 'chờ xử lý' &&
+                                  handlePayment(booking._id)
+                                }
+                                disabled={!booking.meals?.length || booking.paymentStatus !== 'chờ xử lý'}
+                              >
+                                THANH TOÁN
+                              </ButtonStyledGreen>
+                              <ButtonStyled onClick={() => handleOpenEditBooking(booking)}>
+                                CẬP NHẬT
+                              </ButtonStyled>
+                              <ButtonStyledYellow
+                                onClick={() => handleOpenOrderMeal(booking)}
+                              >
+                                MÓN ĐÃ ĐẶT
+                              </ButtonStyledYellow>
+                            <ButtonStyledRed
+                              // onClick={() => handleCancelBooking(booking._id)}
+                              onClick={() => setIsOpenDelete(true)}
                             >
-                              MÓN ĐÃ ĐẶT
-                            </ButtonStyledYellow>
-                          <ButtonStyledRed
-                            // onClick={() => handleCancelBooking(booking._id)}
-                            onClick={() => setIsOpenDelete(true)}
-                          >
-                            <FontAwesomeIcon icon={faTrash} /> HỦY
-                          </ButtonStyledRed>
-                          <ModalComps
-                            forceRender
-                            title="Xóa món ăn"
-                            isOpen={isOpenDelete}
-                            onCancel={() => setIsOpenDelete(false)}
-                          >
-                            <h1>Bạn có chắc muốn hủy đơn đặt này không?!!!</h1>
-                            <WrappedButton style={{ justifyContent: 'center'}}>
-                              <ButtonStyled style={{ width: "200px"}} onClick={() => setIsOpenDelete(false)}>KHÔNG TÔI BẤM NHẦM</ButtonStyled>
-                              <ButtonSave
-                              isLoading={isLoadingCustom} 
-                              onClick={() => handleCancelBooking(booking._id)}
-                              >HỦY MẸ ĐI</ButtonSave>
-                            </WrappedButton>
-                          </ModalComps>
-                          </Action>
-                        )}
-                    
-                  </div>
+                              <FontAwesomeIcon icon={faTrash} /> HỦY
+                            </ButtonStyledRed>
+                            <ModalComps
+                              forceRender
+                              title="Xóa món ăn"
+                              isOpen={isOpenDelete}
+                              onCancel={() => setIsOpenDelete(false)}
+                            >
+                              <h1>Bạn có chắc muốn hủy đơn đặt này không?!!!</h1>
+                              <WrappedButton style={{ justifyContent: 'center'}}>
+                                <ButtonStyled style={{ width: "200px"}} onClick={() => setIsOpenDelete(false)}>KHÔNG TÔI BẤM NHẦM</ButtonStyled>
+                                <ButtonSave
+                                isLoading={isLoadingCustom} 
+                                onClick={() => handleCancelBooking(booking._id)}
+                                >HỦY MẸ ĐI</ButtonSave>
+                              </WrappedButton>
+                            </ModalComps>
+                            </Action>
+                          )}
+                      
+                    </div>
+                  </>
                 ))
               ) : (
                 <p>Chưa có đặt bàn nào.</p>

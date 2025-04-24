@@ -509,6 +509,32 @@ const updateMeals = (bookingId, data, userId, isAdmin) => {
   });
 };
 
+
+const deleteBooking = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const checkBooking = await Booking.findOne({
+        _id: id,
+      });
+      if (checkBooking === null) {
+        resolve({
+          status: "ERR",
+          message: "Không có bàn đặt này!",
+        });
+      }
+      await Booking.findByIdAndDelete(id);
+      resolve({
+        status: "SUCCESS",
+        message: "Xóa thành công!",
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+
+
 module.exports = {
   bookingTable,
   updateBooking,
@@ -517,4 +543,5 @@ module.exports = {
   getMyBookings,
   getAll,
   updateMeals,
+  deleteBooking,
 };

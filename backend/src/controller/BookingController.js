@@ -230,6 +230,24 @@ const updateMeals = async (req, res) => {
   }
 };
 
+const deleteBooking = async (req, res) => {
+  try {
+    const bookingId = req.params.id;
+    if (!bookingId) {
+      return res.status(200).json({
+        status: "ERR",
+        message: "Không tìm thấy id bàn đặt!",
+      });
+    }
+    const response = await BookingService.deleteBooking(bookingId);
+    return res.status(200).json(response);
+  } catch (e) {
+    return res.status(404).json({
+      message: e,
+    });
+  }
+};
+
 module.exports = {
   bookingTable,
   updateBooking,
@@ -238,4 +256,5 @@ module.exports = {
   getMyBookings,
   getAll,
   updateMeals,
+  deleteBooking,
 };

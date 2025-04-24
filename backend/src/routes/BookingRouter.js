@@ -10,5 +10,6 @@ router.get('/GetBooking/:id',authUserMiddleware, BookingController.getBooking)
 router.get('/GetAll', authMiddleWare, BookingController.getAll)
 router.get("/GetMyBookings", authUserMiddleware, BookingController.getMyBookings);
 router.put("/UpdateMeals/:id", authUserMiddleware, BookingController.updateMeals);
+router.delete("/DeleteBooking/:id", authMiddleWare, BookingController.deleteBooking);
 
 module.exports = router

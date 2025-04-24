@@ -15,18 +15,21 @@ import {
   SectionTitle,
   SectionWrapper,
   SelectStyled,
+  InputStyledSearch,
 } from "./style";
 import LoadingButton from "../../components/loadingComps/loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import TableComponent from "../../components/tableComps/Table";
 import { useSelector } from "react-redux";
 import * as BookingService from "../../services/bookingservice";
 import { getAllRestaurant } from "../../services/restaurantservice";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import DrawerComps from "../../components/drawerComps/drawer";
+import ModalComps from "../../components/modalComps/modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useMutationHook } from "../../hook/useMutationHook";
 
 const AdminManageBooking = () => {
   const user = useSelector((state) => state.user);
@@ -34,6 +37,7 @@ const AdminManageBooking = () => {
   const [rowSelected, setRowSelected] = useState("");
   const [searchText, setSearchText] = useState("");
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+  const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [isLoadingCustom, setIsLoadingCustom] = useState(false);
   const [stateBookingDetail, setStateBookingDetail] = useState({
     name: "",
@@ -52,7 +56,7 @@ const AdminManageBooking = () => {
 
   const queryClient = useQueryClient();
 
-  // Fetch tất cả booking
+  // Fetch all bookings
   const handleGetAllBooking = async () => {
     const res = await BookingService.getAll(user?.access_token);
     if (res?.status === "ERR") {
@@ -68,7 +72,7 @@ const AdminManageBooking = () => {
   });
   const { data: dataBooking } = queryBooking;
 
-  // Fetch danh sách nhà hàng
+  // Fetch all restaurants
   const handleGetAllRestaurants = async () => {
     const res = await getAllRestaurant(user?.access_token);
     if (res?.status === "SUCCESS") {
@@ -84,7 +88,7 @@ const AdminManageBooking = () => {
   });
   const { data: restaurants } = queryRestaurants;
 
-  // Fetch chi tiết booking
+  // Fetch booking details
   const fetchGetDetailBooking = async (rowSelected) => {
     const res = await BookingService.getBooking(rowSelected, user?.access_token);
     if (res?.data) {
@@ -111,30 +115,49 @@ const AdminManageBooking = () => {
     }
   }, [rowSelected]);
 
-  // Mutation để cập nhật booking
-  const mutationUpdate = useMutation({
-    mutationFn: (data) =>
-      BookingService.updateBooking(rowSelected, data, user?.access_token),
-    onSuccess: (res) => {
-      setIsLoadingCustom(false);
-      if (res.status === "SUCCESS") {
-        setNotification({ type: "success", message: "Cập nhật booking thành công!" });
-        queryClient.invalidateQueries(["bookings"]);
-        setTimeout(() => {
-          setNotification(null);
-          setIsOpenDrawer(false);
-        }, 3000);
-      } else {
-        setNotification({ type: "error", message: res.message || "Cập nhật thất bại!" });
-        setTimeout(() => setNotification(null), 3000);
-      }
-    },
-    onError: (error) => {
-      setIsLoadingCustom(false);
-      setNotification({ type: "error", message: "Có lỗi xảy ra khi cập nhật!" });
-      setTimeout(() => setNotification(null), 3000);
-    },
+  // Mutation for updating booking
+  const mutationUpdate = useMutationHook((data) => {
+    const { id, token, ...rest } = data;
+    return BookingService.updateBooking(id, rest, token);
   });
+  const { data: dataUpdate } = mutationUpdate;
+
+  // Mutation for deleting booking
+  const mutationDelete = useMutationHook((data) => {
+    const { id, token } = data;
+    return BookingService.deleteBooking(id, token);
+  });
+  const { data: dataDelete } = mutationDelete;
+
+  // Handle notifications for update
+  useEffect(() => {
+    if (dataUpdate?.status === "SUCCESS") {
+      setNotification({ type: "success", message: "Cập nhật booking thành công!" });
+      queryClient.invalidateQueries(["bookings"]);
+      setTimeout(() => {
+        setNotification(null);
+        setIsOpenDrawer(false);
+      }, 3000);
+    } else if (dataUpdate?.status === "ERR") {
+      setNotification({ type: "error", message: dataUpdate.message || "Cập nhật thất bại!" });
+      setTimeout(() => setNotification(null), 3000);
+    }
+  }, [dataUpdate]);
+
+  // Handle notifications for delete
+  useEffect(() => {
+    if (dataDelete?.status === "SUCCESS") {
+      setNotification({ type: "success", message: "Xóa booking thành công!" });
+      queryClient.invalidateQueries(["bookings"]);
+      setTimeout(() => {
+        setNotification(null);
+        setIsOpenDelete(false);
+      }, 3000);
+    } else if (dataDelete?.status === "ERR") {
+      setNotification({ type: "error", message: dataDelete.message || "Xóa thất bại!" });
+      setTimeout(() => setNotification(null), 3000);
+    }
+  }, [dataDelete]);
 
   const handleOpenGetDetailBooking = () => {
     setIsOpenDrawer(true);
@@ -158,6 +181,8 @@ const AdminManageBooking = () => {
       return;
     }
     const payload = {
+      id: rowSelected,
+      token: user?.access_token,
       restaurant: stateBookingDetail.restaurantId || undefined,
       floor: Number(stateBookingDetail.floor),
       numberOfPeople: Number(stateBookingDetail.numberOfPeople),
@@ -170,11 +195,26 @@ const AdminManageBooking = () => {
     };
     console.log("Payload for updateBooking:", payload);
     mutationUpdate.mutate(payload);
+    setTimeout(() => setIsLoadingCustom(false), 3000);
+  };
+
+  const handleDeleteBooking = () => {
+    setIsLoadingCustom(true);
+    mutationDelete.mutate({
+      id: rowSelected,
+      token: user?.access_token,
+    });
+    setTimeout(() => setIsLoadingCustom(false), 3000);
   };
 
   const renderAction = () => {
     return (
       <div>
+        <FontAwesomeIcon
+          style={{ cursor: "pointer", marginRight: "20px", fontSize: "24px", color: "#FF0000" }}
+          icon={faTrash}
+          onClick={() => setIsOpenDelete(true)}
+        />
         <FontAwesomeIcon
           style={{ cursor: "pointer", fontSize: "24px", color: "#f6ac00" }}
           icon={faPenToSquare}
@@ -225,20 +265,19 @@ const AdminManageBooking = () => {
         .map((booking) => ({ ...booking, key: booking._id }))
     : [];
 
-  // Nhà hàng hiện tại
+  // Current restaurant
   const currentRestaurant = restaurants?.find((r) => r._id === stateBookingDetail.restaurantId) || {};
 
-  // Danh sách số khách (1-10)
+  // Number of people options (1-10)
   const numberOfPeopleOptions = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
     <>
       <HeaderTitle>Quản lý đặt bàn</HeaderTitle>
-      <InputStyled
+      <InputStyledSearch
         placeholder="Tìm kiếm theo tên khách hàng hoặc nhà hàng"
         value={searchText}
-        onChange={(value) => setSearchText(value)}
-        style={{ width: "300px", marginTop: "40px" }}
+        onChange={(e) => setSearchText(e.target.value)}
       />
 
       <TableComponent
@@ -260,7 +299,7 @@ const AdminManageBooking = () => {
       >
         <WrapperEdit>
           <BoxWrapper>
-            {/* Phần thông tin khách hàng */}
+            {/* Customer Information */}
             <SectionWrapper>
               <SectionTitle>Thông tin khách hàng</SectionTitle>
               <WrappedContent>
@@ -275,7 +314,7 @@ const AdminManageBooking = () => {
               </WrappedContent>
             </SectionWrapper>
 
-            {/* Phần thông tin đặt bàn */}
+            {/* Booking Information */}
             <SectionWrapper>
               <SectionTitle>Thông tin đặt bàn</SectionTitle>
               <BoxInput>
@@ -362,12 +401,12 @@ const AdminManageBooking = () => {
                 <Label>Ghi chú:</Label>
                 <InputStyled
                   value={stateBookingDetail.note}
-                  onChange={(value) => handleOnChangeDetail("note", value)}
+                  onChange={(e) => handleOnChangeDetail("note", e.target.value)}
                 />
               </BoxInput>
             </SectionWrapper>
 
-            {/* Phần trạng thái và thanh toán */}
+            {/* Status and Payment */}
             <SectionWrapper>
               <SectionTitle>Trạng thái và thanh toán</SectionTitle>
               <WrappedContent>
@@ -405,7 +444,7 @@ const AdminManageBooking = () => {
               </BoxInput>
             </SectionWrapper>
 
-            {/* Nút hành động */}
+            {/* Action Buttons */}
             <WrappedButton>
               <ButtonStyled onClick={() => setIsOpenDrawer(false)}>ĐÓNG</ButtonStyled>
               <ButtonStyled isLoading={isLoadingCustom} onClick={handleUpdateBooking}>
@@ -415,6 +454,22 @@ const AdminManageBooking = () => {
           </BoxWrapper>
         </WrapperEdit>
       </DrawerComps>
+
+      {/* Delete Confirmation Modal */}
+      <ModalComps
+        forceRender
+        title="Xóa đặt bàn"
+        isOpen={isOpenDelete}
+        onCancel={() => setIsOpenDelete(false)}
+      >
+        <h1>Bạn có chắc muốn xóa đặt bàn này không?!!!</h1>
+        <WrappedButton style={{ justifyContent: "center" }}>
+          <ButtonStyled onClick={() => setIsOpenDelete(false)}>ĐÓNG</ButtonStyled>
+          <ButtonStyled isLoading={isLoadingCustom} onClick={handleDeleteBooking}>
+            XÓA
+          </ButtonStyled>
+        </WrappedButton>
+      </ModalComps>
 
       {notification && (
         <Notification type={notification.type}>{notification.message}</Notification>

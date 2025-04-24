@@ -70,6 +70,11 @@ export const InputStyled = styled(InputForm)`
   }
 `;
 
+export const InputStyledSearch = styled(InputForm)`
+  width: 40%;
+  margin-top: 20px;
+`;
+
 export const WrappedButton = styled.div`
   display: flex;
   gap: 20px;
