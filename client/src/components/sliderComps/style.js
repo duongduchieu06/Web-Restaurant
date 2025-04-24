@@ -16,8 +16,9 @@ export const Slides = styled.div`
 
 export const Image = styled.img`
   width: 100%;
-  height: auto;
+  height: 560px;
   object-fit: cover;
+  object-position: center;
 `
 
 

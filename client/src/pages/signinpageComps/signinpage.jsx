@@ -10,6 +10,8 @@ import slider2 from "../../assest/image/sliderSI2.jpg"
 import slider3 from "../../assest/image/sliderSI3.jpg"
 import slider4 from "../../assest/image/sliderSI4.jpg"
 import slider5 from "../../assest/image/sliderSI5.jpg"
+import slider6 from "../../assest/image/sliderSI6.jpg"
+import slider7 from "../../assest/image/sliderSI7.jpg"
 import { useNavigate } from "react-router-dom";
 import * as UserService from '../../services/userservice'
 import { useMutationHook } from "../../hook/useMutationHook";
@@ -98,7 +100,7 @@ const SignInPage = () => {
   const handelNavigateHomePage = () => {
     navigate('/')
   }
-  const sliderImages = [slider1, slider2, slider3, slider4, slider5];
+  const sliderImages = [slider1, slider2, slider3, slider4, slider5, slider6, slider7];
 
   console.log("data?.status", data?.status, data?.message)
 
