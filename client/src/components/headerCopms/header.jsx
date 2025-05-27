@@ -20,7 +20,7 @@ import * as UserService from '../../services/userservice'
 const categories = [
   { name: 'GIỚI THIỆU', path: '/Introduce' },
   { name: 'THỰC ĐƠN', path: '/Menu' },
-  { name: 'ĐẶT BÀN', path: '/BooKTable' }
+  // { name: 'ĐẶT BÀN', path: '/BooKTable' }
 ];
 
 const Header = () => {
