@@ -67,7 +67,8 @@ npm start
 REACT_APP_API_URL=http://localhost:3000/api
 DANGEROUSLY_DISABLE_HOST_CHECK=true
 ```
-
+## Link trang web đã được deploy
+https://chopsvn.vercel.app/
 ---
 
 ## 🔐 TÀI KHOẢN MẶC ĐỊNH
