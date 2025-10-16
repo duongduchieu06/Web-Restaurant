@@ -55,7 +55,7 @@ const InforPage = () => {
       <WrapperContent bgImage={bgFresh} direction="row">
         <BoxText textColor="#fff">
           <TextFront>
-            <span style={{ fontSize: "60px", fontWeight: 700 }}>
+            <span style={{ fontSize: "60px", fontWeight: 700, color: "#f6ac00" }}>
               TƯƠI MỖI NGÀY
             </span>
             <Paragraph>
