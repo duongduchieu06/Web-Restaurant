@@ -10,7 +10,7 @@ import AdminManageRestaurant from "../pages/AdminManageResComps/adminmanageresta
 import AdminManageBooking from "../pages/AdminManageBookingComps/adminmanagebooking"
 import PaymentSuccess from "../pages/PaymentSuccess";
 import PaymentFailure from "../pages/PaymentFailure";
-import InforPage from "../pages/inforComps/menupage"
+import InforPage from "../pages/inforComps/inforpage"
 
 export const routes = [
     {
