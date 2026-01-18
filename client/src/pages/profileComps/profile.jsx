@@ -511,7 +511,7 @@ const Profile = () => {
                             </ButtonStyledRed>
                             <ModalComps
                               forceRender
-                              title="Xóa món ăn"
+                              title="HỦY ĐẶT BÀN"
                               isOpen={isOpenDelete}
                               onCancel={() => setIsOpenDelete(false)}
                             >
@@ -521,7 +521,7 @@ const Profile = () => {
                                 <ButtonSave
                                 isLoading={isLoadingCustom} 
                                 onClick={() => handleCancelBooking(booking._id)}
-                                >HỦY MẸ ĐI</ButtonSave>
+                                >XÁC NHẬN HỦY</ButtonSave>
                               </WrappedButton>
                             </ModalComps>
                             </Action>

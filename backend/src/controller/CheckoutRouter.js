@@ -21,16 +21,22 @@ const paymentWithVnPay = async (req, res, next) => {
       return res.status(400).json({ message: 'Booking không có món ăn để thanh toán' });
     }
 
-    const ipAddr =
+    let ipAddr =
       req.headers['x-forwarded-for'] ||
       req.connection.remoteAddress ||
       req.socket.remoteAddress ||
       req.connection.socket.remoteAddress;
+    if (ipAddr && ipAddr.includes(',')) {
+      ipAddr = ipAddr.split(',')[0].trim();
+    }
+    if (ipAddr === '::1') {
+      ipAddr = '127.0.0.1';
+    }
 
-    const tmnCode = process.env.VNP_TMNCODE;
-    const secretKey = process.env.VNP_HASHSECRET;
-    let vnpUrl = process.env.VNP_URL;
-    const returnUrl = process.env.VNP_RETURNURL;
+    const tmnCode = (process.env.VNP_TMNCODE || '').trim();
+    const secretKey = (process.env.VNP_HASHSECRET || '').trim();
+    let vnpUrl = (process.env.VNP_URL || '').trim();
+    const returnUrl = (process.env.VNP_RETURNURL || '').trim();
 
     const date = new Date();
     const createDate = moment(date).format('YYYYMMDDHHmmss');
@@ -43,7 +49,7 @@ const paymentWithVnPay = async (req, res, next) => {
       vnp_Locale: 'vn',
       vnp_CurrCode: 'VND',
       vnp_TxnRef: orderId,
-      vnp_OrderInfo: `Thanh toán đặt bàn ${bookingId}`,
+      vnp_OrderInfo: `Thanh toan dat ban ${bookingId}`,
       vnp_OrderType: 'billpayment',
       vnp_Amount: booking.totalPrice * 100,
       vnp_ReturnUrl: returnUrl,
@@ -52,14 +58,22 @@ const paymentWithVnPay = async (req, res, next) => {
     };
 
     vnp_Params = sortObject(vnp_Params);
-
+    // ngay trước: const signData = querystring.stringify(vnp_Params, { encode: false });
     const signData = querystring.stringify(vnp_Params, { encode: false });
     const hmac = crypto.createHmac('sha512', secretKey);
     const signed = hmac.update(Buffer.from(signData, 'utf-8')).digest('hex');
     vnp_Params['vnp_SecureHash'] = signed;
+    vnp_Params['vnp_SecureHashType'] = 'SHA512';
 
+    // vnp_Params = sortObject(vnp_Params);
+
+    // const signData = querystring.stringify(vnp_Params, { encode: false });
+    // const hmac = crypto.createHmac('sha512', secretKey);
+    // const signed = hmac.update(Buffer.from(signData, 'utf-8')).digest('hex');
+    // vnp_Params['vnp_SecureHash'] = signed;
+
+    // vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
-
     return res.status(200).json({ paymentUrl: vnpUrl });
   } catch (error) {
     console.error('Error creating VNPay URL:', error);
@@ -108,7 +122,7 @@ function sortObject(obj) {
   const sorted = {};
   const str = Object.keys(obj).sort();
   for (let key of str) {
-    sorted[key] = encodeURIComponent(obj[key]).replace(/%20/g, '+');
+    sorted[key] = encodeURIComponent(String(obj[key])).replace(/%20/g, '+');
   }
   return sorted;
 }

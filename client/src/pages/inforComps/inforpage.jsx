@@ -106,15 +106,6 @@ const InforPage = () => {
             <Paragraph>
               Hãy tới trải nghiệm không gian và đồ ăn tại một trong những nhà hàng của Chops,
               hoặc để Chops giao ngay một bữa ăn thịnh soạn tới tận cửa nhà bạn. <br />
-              Đặt ngay burger tại:{" "}
-              <a
-                href="https://www.facebook.com/ChopsVietnam"
-                target="_blank"
-                rel="noreferrer"
-                style={{ color: "#f6ac00" }}
-              >
-                https://www.facebook.com/ChopsVietnam
-              </a>
             </Paragraph>
           </TextFront>
         </BoxText>

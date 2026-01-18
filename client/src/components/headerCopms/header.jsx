@@ -100,10 +100,10 @@ const Header = () => {
               </>
             )}
           </BoxButton>
-          <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "10px"}}>
+          {/* <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "10px"}}>
             <ButtonLanguage style={{backgroundImage: `url(${VE})`}} />
             <ButtonLanguage style={{backgroundImage: `url(${EN})`}} />
-          </div>
+          </div> */}
         </HeaderContent>
         <HeaderContent style={{backgroundColor: '#000', height: '50px'}}>
           {categories.map((category) => {

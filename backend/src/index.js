@@ -1,11 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const path = require("path");
 const mongoose = require("mongoose");
 const routes = require('./routes/index');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-dotenv.config();
+const envPath = path.join(__dirname, "..", ".env");
+dotenv.config({ path: envPath, override: true });
 
 const app = express();
 
