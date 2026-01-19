@@ -139,5 +139,10 @@ Sinh viên Khoa CNTT – Trường Đại Học Điện Lực
 📧 Email: duonghieuyp06@gmail.com
 
 ---
+<img width="945" height="432" alt="image" src="https://github.com/user-attachments/assets/a9c5d782-2923-4756-90a5-55dba75ab591" />
+<img width="945" height="431" alt="image" src="https://github.com/user-attachments/assets/44d5a150-5195-4a45-b2da-95774457c690" />
+<img width="945" height="431" alt="image" src="https://github.com/user-attachments/assets/e5e427e5-c93d-49a5-8d89-1f9dbdcd0a0d" />
+<img width="945" height="431" alt="image" src="https://github.com/user-attachments/assets/4c22ced4-57fb-4552-ac92-8f750f041edc" />
+
 <img width="945" height="430" alt="image" src="https://github.com/user-attachments/assets/985a84ae-0e45-42f6-b598-fd9f996f1411" />
 
