@@ -27,6 +27,7 @@ Hệ thống bao gồm hai phần chính: **Frontend (ReactJS)** và **Backend (
 
 ### 1️⃣ Clone dự án
 ```bash
+https://chopsvn.vercel.app/
 git clone https://github.com/<your-username>/chops-restaurant.git
 cd chops-restaurant
 ```
